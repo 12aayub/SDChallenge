@@ -3,7 +3,9 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
+import ActivityModal from './ActivityModal.js'
 import Activities from './pages/Activities'
+
 
 class App extends Component {
   render() {
@@ -13,7 +15,9 @@ class App extends Component {
           <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
         </PageHeader>
 
-<Activities />
+        <ActivityModal/>
+        <Activities />
+
 
       </Grid>
     );
