@@ -12,7 +12,10 @@ class App extends Component {
     return (
       <Grid>
         <PageHeader>
+		<div>
           <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
+		  <Map />
+		</div>
         </PageHeader>
 
         <ActivityModal/>
