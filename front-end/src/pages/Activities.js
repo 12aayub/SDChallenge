@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 
 //Activities List
-class ActivitiesList extends Component {
+class Activities extends Component {
 
   constructor(props){
     super(props)
@@ -56,4 +56,4 @@ class ActivitiesList extends Component {
   }
 }
 
-        export default ActivitiesList;
+        export default Activities;
