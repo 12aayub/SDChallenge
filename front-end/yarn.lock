@@ -5387,6 +5387,12 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-google-map@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-google-map/-/react-google-map-3.1.0.tgz#8fe05f22f4900bba6097ba84d5ecc4572bbd2265"
+  dependencies:
+    prop-types "^15.6.0"
+
 react-overlays@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.1.tgz#0b84708d8007082163c47155a2f60a0858c7a3c7"

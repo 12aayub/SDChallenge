@@ -3,7 +3,7 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import Map from './pages/map'
+import Map from './pages/map/map'
 
 class App extends Component {
   render() {
