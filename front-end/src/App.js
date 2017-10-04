@@ -3,7 +3,9 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import Map from './pages/map/map'
+import ActivityModal from './ActivityModal.js'
+import Activities from './pages/Activities'
+
 
 class App extends Component {
   render() {
@@ -15,6 +17,11 @@ class App extends Component {
 		  <Map />
 		</div>
         </PageHeader>
+
+        <ActivityModal/>
+        <Activities />
+
+
       </Grid>
     );
   }
