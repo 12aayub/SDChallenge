@@ -46,7 +46,7 @@ class App extends Component {
         <PageHeader>
           <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
         </PageHeader>
-        <ActivityModal activities={this.state.activities}/>
+        <Activities activities={this.state.activities}/>
       </Grid>
     );
   }
