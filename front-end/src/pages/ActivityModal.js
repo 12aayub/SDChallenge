@@ -40,9 +40,7 @@ class ActivityModal extends Component {
             <h4>Points:{this.state.currentActivity.points} </h4>
           </Modal.Body>
           <Modal.Footer>
-            <button
-            onClick={this.close.bind(this)}
-            >Close</button>
+            <button onClick={this.close.bind(this)} >Close</button>
           </Modal.Footer>
         </Modal>
       )
