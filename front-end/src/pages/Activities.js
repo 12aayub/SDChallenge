@@ -1,60 +1,72 @@
-
-
 import React, { Component } from 'react';
+import {Modal, ListGroup, ListGroupItem} from 'react-bootstrap';
 
-//Activities List
-class Activities extends Component {
+
+class ActivityModal extends Component {
 
   constructor(props){
-    super(props)
+    super(props);
     this.state = {
-      activities: [
-        {
-          id: 1,
-          name: 'Museum',
-          description: 'Visit the Art Museum at Balboa Park. Take a picture of yourself in front of your favorite piece of art.',
-          points: 25
+      showModal:false,
+      currentActivity: null
+    }
+  }
 
-        },
-        {
-          id: 2,
-          name: 'Mission Beach',
-          description: 'Take a walk on the boardwalk. Get a picture of yourself in front of the rollercoaster.',
-          points: 45
+  close() {
+    this.setState({ showModal: false });
+  }
 
-        },
-        {
-          id: 3,
-          name: 'Hillcrest Farmer\'s Market',
-          description: 'Visit the Hillcrest Farmer\'s Market on Sunday. Take a pictue in front of your favorite vendor.',
-          points: 44
+  open(activity) {
+    this.setState({
+      showModal: true,
+      currentActivity: activity
+    });
+  }
 
-        }
-      ]
+
+  modal() {
+    if(this.state.currentActivity){
+      const theModal = (
+        <Modal show={this.state.showModal}
+        onHide={this.close.bind(this)}
+        >
+          <Modal.Header>
+            <Modal.Title>{this.state.currentActivity.name}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>{this.state.currentActivity.address}</h4>
+            <p>{this.state.currentActivity.description}</p>
+            <hr />
+            <h4>Points:{this.state.currentActivity.points} </h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={this.close.bind(this)} >Close</button>
+          </Modal.Footer>
+        </Modal>
+      )
+      return theModal
+    } else {
+      return <div></div>
     }
   }
 
   render() {
-    //map activities array
 
     return (
-      <div>
-        {this.state.activities.map((activity, index) =>
-          {
-            return (
-                <p key={index}>
-                  <div><ul><strong>{activity.name}</strong>
-                    <div><li>{activity.description}</li></div>
-                    <div><li>{activity.points} points</li></div>
-                    <div><li><input type='checkbox' name='completed' value='true'/>Completed?</li></div>
-                  </ul></div>
-                </p>
-            )
-          }
-        )}
-      </div>
+      <ListGroup>
+        {this.props.activities.map((activity) =>{
+          return (
+            <ListGroupItem key = {activity.id}>
+              <button className = "activity" onClick={this.open.bind(this, activity)}>
+                {activity.name}
+              </button>
+              {this.modal()}
+            </ListGroupItem>
+          )
+        })}
+      </ListGroup>
     );
-  }
-}
+    }
+};
 
-        export default Activities;
+export default ActivityModal;
