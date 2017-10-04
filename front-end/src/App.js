@@ -10,6 +10,7 @@ import Activities from './pages/Activities.js'
 class App extends Component {
   constructor(props){
     super(props);
+    this.handleCompletedActivity = this.handleCompletedActivity.bind(this);
     this.state = {
       activities: [
         {
@@ -37,7 +38,23 @@ class App extends Component {
 
         }
       ]
-    }
+      user: [
+        {
+          id: 0,
+          name: 'bob'
+          email: 'bob@bob.com',
+          activitiesCompleted: '[0,1,2]',
+          totalPoints: 250
+        },
+        {
+          id: 1,
+          name: 'jim'
+          email: 'jim@jim.com',
+          activitiesCompleted: '[0,3,2]',
+          totalPoints: 50
+        },
+      }
+    ]
   }
 
   render() {
