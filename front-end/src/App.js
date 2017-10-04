@@ -5,7 +5,7 @@ import {
 } from 'react-bootstrap'
 import ActivityModal from './ActivityModal.js'
 import Activities from './pages/Activities'
-
+import Map from './pages/map'
 
 class App extends Component {
   render() {
@@ -14,14 +14,12 @@ class App extends Component {
         <PageHeader>
 		<div>
           <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
-		  <Map />
+
 		</div>
         </PageHeader>
-
+				<Map />
         <ActivityModal/>
         <Activities />
-
-
       </Grid>
     );
   }
