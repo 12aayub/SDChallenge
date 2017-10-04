@@ -3,7 +3,7 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import ActivityModal from './pages/ActivityModal.js'
+import Activities from './pages/Activities.js'
 
 
 
