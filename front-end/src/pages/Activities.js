@@ -46,6 +46,7 @@ class Activities extends Component {
                   <div><ul><strong>{activity.name}</strong>
                     <div><li>{activity.description}</li></div>
                     <div><li>{activity.points} points</li></div>
+                    <div><li><input type='checkbox' name='completed' value='true'/>Completed?</li></div>
                   </ul></div>
                 </p>
             )
