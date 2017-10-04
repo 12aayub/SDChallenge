@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import {Modal, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 
-class ActivityModal extends Component {
+class Activities extends Component {
 
   constructor(props){
     super(props);
     this.state = {
       showModal:false,
-      currentActivity: null
+      currentActivity: null,
+      completeActivity: false
     }
   }
 
@@ -41,6 +42,8 @@ class ActivityModal extends Component {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)} >Close</button>
+            <button onClick={this.close.bind(this)} >Complete Activity</button>
+
           </Modal.Footer>
         </Modal>
       )
@@ -69,4 +72,4 @@ class ActivityModal extends Component {
     }
 };
 
-export default ActivityModal;
+export default Activities;
