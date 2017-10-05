@@ -3,8 +3,7 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import Activities from './pages/Activities'
-import Map from './pages/map'
+import ActivitiesAndMap from './pages/ActivitiesAndMap'
 
 class App extends Component {
   constructor(props){
@@ -46,17 +45,11 @@ class App extends Component {
     return (
       <Grid>
         <PageHeader>
-		<div>
-          <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
-		</div>
+					<div>
+			          <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
+					</div>
         </PageHeader>
-<<<<<<< HEAD
-				<Map activities={this.state.activities}/>
-=======
-				<Map />
-        <ActivityModal/>
->>>>>>> cf01bd521f8c755993ec1ca8b51fad537924b0da
-        <Activities activities={this.state.activities}/>
+				<ActivitiesAndMap activities={this.state.activities}/>
       </Grid>
     );
   }
