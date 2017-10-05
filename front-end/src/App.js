@@ -50,7 +50,12 @@ class App extends Component {
           <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
 		</div>
         </PageHeader>
+<<<<<<< HEAD
 				<Map activities={this.state.activities}/>
+=======
+				<Map />
+        <ActivityModal/>
+>>>>>>> cf01bd521f8c755993ec1ca8b51fad537924b0da
         <Activities activities={this.state.activities}/>
       </Grid>
     );
