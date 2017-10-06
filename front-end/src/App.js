@@ -4,6 +4,7 @@ import {
   PageHeader
 } from 'react-bootstrap'
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
+import NewActivity from './pages/newActivity'
 
 class App extends Component {
   constructor(props){
@@ -38,21 +39,22 @@ class App extends Component {
 					longitude: -117.168310
 				}
 			]
-    }
-  }
+		}
+	}
 
-  render() {
-    return (
-      <Grid>
-        <PageHeader>
+	render() {
+		return (
+			<Grid>
+				<PageHeader>
 					<div>
-			          <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
+						<h1>THE SAN DIEGO CHALLENGE (tm)</h1>
 					</div>
-        </PageHeader>
+				</PageHeader>
 				<ActivitiesAndMap activities={this.state.activities}/>
-      </Grid>
-    );
-  }
+				<NewActivity />
+			</Grid>
+		);
+	}
 }
 
 export default App;
