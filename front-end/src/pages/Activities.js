@@ -34,10 +34,7 @@ class ActivityModal extends Component {
             <Modal.Title>{this.state.currentActivity.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>{this.state.currentActivity.address}</h4>
             <p>{this.state.currentActivity.description}</p>
-            <hr />
-            <h4>Points:{this.state.currentActivity.points} </h4>
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)} >Close</button>
