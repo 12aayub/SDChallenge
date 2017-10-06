@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Modal, ListGroup, ListGroupItem} from 'react-bootstrap';
 
 
-class ActivityModal extends Component {
+class Activities extends Component {
 
   constructor(props){
     super(props);
@@ -66,4 +66,4 @@ class ActivityModal extends Component {
     }
 };
 
-export default ActivityModal;
+export default Activities;

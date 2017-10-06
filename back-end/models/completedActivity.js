@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var completedActivity = sequelize.define('completedActivity', {
-    userId: DataTypes.INTEGER,
+  var CompletedActivity = sequelize.define('CompletedActivities', {
+    userID: DataTypes.INTEGER,
     activityID: DataTypes.INTEGER
   }, {
     classMethods: {
@@ -10,5 +10,5 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  return completedActivity;
+  return CompletedActivity;
 };

@@ -13,27 +13,51 @@ class App extends Component {
     this.state = {
       apiUrl: "http://localhost:3000",
       activities: [],
+      completedActivities: [],
+      userID: 1,
       errors: null
   }
 }
 
-  componentWillMount(){
-    fetch(`${this.state.apiUrl}/activities`)
-    .then((rawResponse) =>{
-      return rawResponse.json()
-    })
-    .then((parsedResponse)=>{
-      this.setState({activities: parsedResponse.activities})
-    })
-  }
+componentWillMount(){
+  fetch(`${this.state.apiUrl}/completedactivities/${this.state.userID}`)
+  .then((rawResponse) =>{
+    console.log(rawResponse)
+    return rawResponse.json()
+  })
+  .then((parsedResponse)=>{
+    console.log(parsedResponse);
+    this.setState({completedActivities: parsedResponse.completedactivities})
+  })
+  fetch(`${this.state.apiUrl}/activities/`)
+  .then((rawResponse) =>{
+    return rawResponse.json()
+  })
+  .then((parsedResponse)=>{
+    this.setState({activities: parsedResponse.activities})
+  })
+}
+
+  // componentWillMount(){
+  //   fetch(`${this.state.apiUrl}/activities/`)
+  //   .then((rawResponse) =>{
+  //     return rawResponse.json()
+  //   })
+  //   .then((parsedResponse)=>{
+  //     this.setState({activities: parsedResponse.activities})
+  //   })
+  // }
 
   render() {
     return (
       <Grid>
         <PageHeader>
-          <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
+          THE SAN DIEGO CHALLENGE (tm)
         </PageHeader>
-        <Activities activities={this.state.activities}/>
+        <Activities
+          activities={this.state.activities}
+          completedactivities={this.state.completedactivities}
+        />
       </Grid>
     );
   }
