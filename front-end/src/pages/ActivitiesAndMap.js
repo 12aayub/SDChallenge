@@ -33,7 +33,8 @@ class ActivitiesAndMap extends Component {
     this.state = {
       showModal:false,
       currentActivity: null,
-      activities: this.props.activities
+      activities: this.props.activities,
+      userID: this.props.userID
     }
   }
 
@@ -84,17 +85,18 @@ class ActivitiesAndMap extends Component {
           <Modal.Body>
           <h4>{this.state.currentActivity.address}</h4>
           <p>{this.state.currentActivity.description}</p>
-          <hr />
+          <hr/>
           <h4>Points:{this.state.currentActivity.points}</h4>
             </Modal.Body>
           <Modal.Footer>
-            <button onClick={this.close.bind(this)} >Close</button>
+            <button onClick={this.close.bind(this)}>Close</button>
+            <button onClick={this.close.bind(this)}>Complete</button>
           </Modal.Footer>
         </Modal>
         )
       return theModal
       } else {
-      return <div></div>
+        return <div></div>
     }
   }
 };

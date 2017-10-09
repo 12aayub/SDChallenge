@@ -1,10 +1,10 @@
-export function fetchCompletedActivities(apiUrl){
+export function fetchActivities(apiUrl){
   return ((dispatch)=>{
-    return fetch(`${apiUrl}/completedActivities`).then((rawResponse)=>{
+    return fetch(`${apiUrl}/allActivities`).then((rawResponse)=>{
       return rawResponse.json()
     }).then((parsedResponse) => {
       let neoData = parsedResponse.activities
-      let activities: []
+      let activitiesArray = []
       Object.keys(neoData).forEach((activity) =>{
           activitiesArray.push({
             name: activity.name
@@ -16,7 +16,7 @@ export function fetchCompletedActivities(apiUrl){
       })
 
       dispatch({
-        type: 'FETCH_COMPLETED_ACTIVITIES',
+        type: 'FETCH_ALL_ACTIVITIES',
         payload: activitiesArray
       })
     })

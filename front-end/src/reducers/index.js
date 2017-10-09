@@ -3,6 +3,7 @@ import completedActivitiesReducer from './completedActivitiesReducer.js'
 import {combineReducers} from 'redux'
 
 export default combineReducers({
-  allActivities: allActivitiesReducer
-  completedActivities: completedActivitiesReducer
+  allActivities: allActivitiesReducer,
+  completedActivities: completedActivitiesReducer,
+  user: userReducer
 })
