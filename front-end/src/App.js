@@ -3,8 +3,8 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import Activities from './pages/Activities'
-import Map from './pages/map'
+import ActivitiesAndMap from './pages/ActivitiesAndMap'
+import NewActivity from './pages/newActivity'
 
 class App extends Component {
   constructor(props){
