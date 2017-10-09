@@ -3,9 +3,8 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
-import Activities from './pages/Activities.js'
-
-
+import Activities from './pages/Activities'
+import Map from './pages/map'
 
 class App extends Component {
   constructor(props){
@@ -18,6 +17,7 @@ class App extends Component {
       errors: null
   }
 }
+
 
 componentWillMount(){
   fetch(`${this.state.apiUrl}/completedactivities/${this.state.userID}`)
@@ -38,15 +38,16 @@ componentWillMount(){
   })
 }
 
-  // componentWillMount(){
-  //   fetch(`${this.state.apiUrl}/activities/`)
-  //   .then((rawResponse) =>{
-  //     return rawResponse.json()
-  //   })
-  //   .then((parsedResponse)=>{
-  //     this.setState({activities: parsedResponse.activities})
-  //   })
-  // }
+  componentWillMount(){
+    fetch(`${this.state.apiUrl}/activities`)
+    .then((rawResponse) =>{
+      return rawResponse.json()
+    })
+    .then((parsedResponse)=>{
+      this.setState({activities: parsedResponse.activities})
+    })
+
+  }
 
   render() {
     return (
@@ -58,6 +59,14 @@ componentWillMount(){
           activities={this.state.activities}
           completedactivities={this.state.completedactivities}
         />
+
+		<div>
+          <h1>THE SAN DIEGO CHALLENGE (tm)</h1>
+		</div>
+        </PageHeader>
+				<Map activities={this.state.activities}/>
+        <Activities activities={this.state.activities}/>
+
       </Grid>
     );
   }
