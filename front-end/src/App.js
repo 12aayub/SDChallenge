@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       apiUrl: "http://localhost:3000",
       activities: [],
-      completedActivities: [],
+      completedactivities: [],
       userID: 1,
       errors: null
   }
@@ -20,7 +20,7 @@ class App extends Component {
 
 
 componentWillMount(){
-  fetch(`${this.state.apiUrl}/completedactivities/${this.state.userID}`)
+  fetch(`${this.state.apiUrl}/completedactivities/`)
   .then((rawResponse) =>{
     console.log(rawResponse)
     return rawResponse.json()
