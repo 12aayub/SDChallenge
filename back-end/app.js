@@ -5,7 +5,7 @@ var validator = require('express-validator');
 var app = express();
 var Activity = require('./models').Activity
 var User = require('./models').User
-var CompletedActivities = require('./models').CompletedActivities
+var CompletedActivity = require('./models').CompletedActivity
 
 
 app.use(express.static('public'))
@@ -29,22 +29,26 @@ app.get('/users', (req, res) => {
   })
 })
 
+app.get('/completedactivities/', (req, res) => {
+  CompletedActivity.findAll().then( (completedactivities) => {
+  res.json({completedactivities:completedactivities})
+  })
+})
+
 app.get('/completedactivities/:id', (req, res) => {
-  // const completed=[]
-  CompletedActivities.findAll({
+  CompletedActivity.findAll({
     where: {
-      userID: req.params.id
-    }
+      userID: req.params["id"],
+      completedAt: {
+        $ne: null
+      }
+    },
+    include: [{
+      model: Activity
+    }]
+  }).then( (completedactivities) =>{
+    res.json({completedactivities: completedactivities})
   })
-  .then( (completedactivities) => {
-    completed=completedactivities
-    res.json({completedactivities:completedactivities})
-  })
-  // Activity.findAll({
-  //   where: {
-  //     activityID: completed
-  //   }
-  // })
 })
 
 app.post('/activities', (req, res) => {

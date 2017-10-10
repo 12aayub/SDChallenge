@@ -14,11 +14,13 @@ module.exports = {
           userID: 1,
           activityID: 2,
           createdAt: new Date(),
+          completedAt: new Date(),
           updatedAt: new Date()
         },
         {
           userID: 2,
           activityID: 1,
+          completedAt: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
         }
