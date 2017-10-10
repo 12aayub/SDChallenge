@@ -1,7 +1,8 @@
-export function completingAction(apiUrl, userID, activityID){
+export function completingAction(apiUrl, activityID){
   return ((dispatch)=>{
     return fetch(`${apiUrl}/completedActivity/new`,
       {
+        //pass in userID and activityID rather than form, below:
         body: JSON.stringify(form),
         headers: {
           'Content-Type': 'application/json'

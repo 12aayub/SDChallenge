@@ -7,10 +7,10 @@ export function fetchActivities(apiUrl){
       let activitiesArray = []
       Object.keys(neoData).forEach((activity) =>{
           activitiesArray.push({
-            name: activity.name
-            description: activity.description
-            latitude: activity.latitude
-            longitude: activity.longitude
+            name: activity.name,
+            description: activity.description,
+            latitude: activity.latitude,
+            longitude: activity.longitude,
             points: activity.points
           })
       })

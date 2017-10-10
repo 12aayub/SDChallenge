@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Modal, ListGroup, ListGroupItem} from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
@@ -34,6 +34,7 @@ class ActivitiesAndMap extends Component {
       showModal:false,
       currentActivity: null,
       activities: this.props.activities,
+      completedActivities: this.props.completedActivities,
       userID: this.props.userID
     }
   }
@@ -67,6 +68,7 @@ class ActivitiesAndMap extends Component {
   }
 
   open(activity) {
+    //if activity matches any id's in completedActivities, then set completed button to "don't show"
     this.setState({
       showModal: true,
       currentActivity: activity
@@ -90,6 +92,7 @@ class ActivitiesAndMap extends Component {
             </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
+            //if currentActivity matches any id's in completedActivities, then show:
             <button onClick={this.close.bind(this)}>Complete</button>
           </Modal.Footer>
         </Modal>
