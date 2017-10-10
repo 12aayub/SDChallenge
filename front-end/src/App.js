@@ -48,7 +48,6 @@ componentWillMount(){
         </PageHeader>
         <Activities
           activities={this.state.activities}
-          // {completedactivities={this.state.completedactivities}
         />
       </Grid>
     <Router>
