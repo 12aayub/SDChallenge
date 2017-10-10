@@ -46,9 +46,8 @@ componentWillMount(){
         <PageHeader>
           THE SAN DIEGO CHALLENGE (tm)
         </PageHeader>
-        <Activities
-          activities={this.state.activities}
-        />
+        <ActivitiesAndMap activities={this.props.allActivities} userID={this.props.userID}/>
+        <NewActivity />
       </Grid>
     <Router>
       <Route exact path="/completedactivities" render={props => (<CompletedActivities completedactivities={this.state.completedactivities} />
