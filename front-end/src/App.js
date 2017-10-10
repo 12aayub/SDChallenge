@@ -8,10 +8,13 @@ import {
   Grid,
   PageHeader
 } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
 import Activities from './pages/Activities'
 import CompletedActivities from './pages/CompletedActivities'
+import fetchAllActivities from './actions/allActivitiesAction'
+import fetchCompletedActivities from './actions/allActivitiesAction'
 
 class App extends Component {
   constructor(props){
