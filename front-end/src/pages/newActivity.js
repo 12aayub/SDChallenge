@@ -84,7 +84,7 @@ class NewActivity extends Component {
 				<Row>
 					<Col xs= {6}>
 						<Button id="submit"
-						onclick={this.handleSubmit.bind(this)}> Create New Activity</Button>
+						onClick={this.handleSubmit.bind(this)}> Create New Activity</Button>
 					</Col>
 				</Row>
 			</form>

@@ -4,18 +4,20 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-	   "test": "jest"
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "crypto": "^1.0.1",
     "express": "^4.16.1",
     "express-validator": "^4.2.1",
     "global": "^4.3.2",
     "nodemon": "^1.12.1",
-    "pg": "^7.3.0",
-    "sequelize": "^4.13.2",
-    "sequelize-cli": "^3.0.0"
+    "pg": "6.1.5",
+    "sequelize": "3.30.4",
+    "sequelize-cli": "2.8.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-jest": "^21.2.0",
