@@ -1,3 +1,5 @@
+//action to complete an activity
+
 export function completingAction(apiUrl, activityID){
   return ((dispatch)=>{
     return fetch(`${apiUrl}/completedActivity/new`,

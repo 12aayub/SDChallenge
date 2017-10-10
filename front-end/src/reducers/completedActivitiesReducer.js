@@ -15,6 +15,5 @@ export default (currentState = initialState, action) =>{
     default:
       newState = currentState
   }
-
   return newState
 }

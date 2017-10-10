@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
-  Redirect,
+  // Redirect,
   Route
 } from 'react-router-dom'
 import {
@@ -12,9 +12,19 @@ import { connect } from 'react-redux'
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
 import CompletedActivities from './pages/CompletedActivities'
-import fetchAllActivities from './actions/allActivitiesAction'
-import fetchCompletedActivities from './actions/allActivitiesAction'
+import { fetchAllActivities } from './actions/allActivitiesAction'
+import { fetchCompletedActivities } from './actions/completedActivitiesAction'
 
+const mapComponentToProps = (store) =>{
+  return {
+    allActivities: store.allActivities.allActivities,
+    completedActivities: store.completedActivities.completedActivities,
+    user: store.user.currentUser,
+    userError: store.user.error
+  }
+}
+
+export default connect(mapComponentToProps)(
 class App extends Component {
   constructor(props){
     super(props);
@@ -36,7 +46,7 @@ class App extends Component {
 
 componentWillMount(){
   this.props.dispatch(fetchAllActivities(this.state.apiUrl))
-  this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
+  this.props.dispatch(fetchCompletedActivities(this.state.apiUrl, this.state.currentUser.id))
 }
 
   render() {
@@ -46,14 +56,15 @@ componentWillMount(){
         <PageHeader>
           THE SAN DIEGO CHALLENGE (tm)
         </PageHeader>
-        <ActivitiesAndMap activities={this.props.allActivities} userID={this.props.userID}/>
+        <ActivitiesAndMap activities={this.props.allActivities} />
         <NewActivity />
       </Grid>
     <Router>
-      <Route exact path="/completedactivities" render={props => (<CompletedActivities completedactivities={this.state.completedactivities} />
+      <Route exact path="/" render={props => (<CompletedActivities completedactivities={this.props.completedActivities} />
       )} />
     </Router>
     </div>
     );
   }
 }
+)

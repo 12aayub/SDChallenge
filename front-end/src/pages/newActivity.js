@@ -5,10 +5,11 @@ import {
   FormGroup,
   FormControl,
   Row,
-  Button,
-  Alert,
-  HelpBlock
+  Button
+  // Alert,
+  // HelpBlock
 } from 'react-bootstrap'
+import { createNewActivity } from '../actions/newActivityAction'
 
 class NewActivity extends Component {
   constructor(props){
@@ -84,7 +85,7 @@ class NewActivity extends Component {
         <Row>
           <Col xs= {6}>
             <Button id="submit"
-            onclick={this.handleSubmit.bind(this)}> Create New Activity</Button>
+            onClick={this.handleSubmit.bind(this)}> Create New Activity</Button>
           </Col>
         </Row>
       </form>

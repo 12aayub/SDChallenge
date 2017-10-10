@@ -5,11 +5,11 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 const MapComponent = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
+    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `400px`, padding: `20px`}} />,
     mapElement: <div style={{ height: `100%` }} />,
-    center: { lat: 32.722752, lng: -117.168310 },
+    center: { lat: 32.722752, lng: -117.168310 }
   }),
     withScriptjs,
     withGoogleMap
@@ -34,8 +34,7 @@ class ActivitiesAndMap extends Component {
       showModal:false,
       currentActivity: null,
       activities: this.props.activities,
-      completedActivities: this.props.completedActivities,
-      userID: this.props.userID
+      completedActivities: this.props.completedActivities
     }
   }
 
@@ -85,14 +84,14 @@ class ActivitiesAndMap extends Component {
             <Modal.Title>{this.state.currentActivity.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <h4>{this.state.currentActivity.address}</h4>
           <p>{this.state.currentActivity.description}</p>
           <hr/>
-          <h4>Points:{this.state.currentActivity.points}</h4>
+          <h4>Longitude: {this.state.currentActivity.longitude}</h4>
+          <h4>Latitude: {this.state.currentActivity.latitude}</h4>
             </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            //if currentActivity matches any id's in completedActivities, then show:
+            {/*if currentActivity matches any id's in completedActivities, then show:*/}
             <button onClick={this.close.bind(this)}>Complete</button>
           </Modal.Footer>
         </Modal>

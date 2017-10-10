@@ -1,3 +1,5 @@
+//add a new activity
+
 export function createNewActivity(apiUrl, form){
   return ((dispatch)=>{
     return fetch(`${apiUrl}/activities/new`,
@@ -15,13 +17,10 @@ export function createNewActivity(apiUrl, form){
     .then((parsedResponse) =>{
         let newActivity = []
         newActivity.push(parsedResponse)
-      }
-    })
-
       dispatch({
         type: 'ADD_NEW_ACTIVITY',
         payload: newActivity
       })
     })
-  })
+})
 }
