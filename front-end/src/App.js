@@ -33,21 +33,8 @@ class App extends Component {
 
 
 componentWillMount(){
-  fetch(`${this.state.apiUrl}/completedactivities/${this.state.currentUser.id}`)
-  .then((rawResponse) =>{
-    return rawResponse.json()
-  })
-  .then((parsedResponse)=>{
-    console.log(parsedResponse);
-    this.setState({completedactivities: parsedResponse.completedactivities})
-  })
-  fetch(`${this.state.apiUrl}/activities`)
-  .then((rawResponse) =>{
-    return rawResponse.json()
-  })
-  .then((parsedResponse)=>{
-    this.setState({activities: parsedResponse.activities})
-  })
+  this.props.dispatch(fetchAllActivities(this.state.apiUrl))
+  this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
 }
 
   render() {
@@ -70,32 +57,3 @@ componentWillMount(){
     );
   }
 }
-
-export default connect(mapComponentToProps)(
-  class App extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-          apiUrl: "http://localhost:3000"
-      }
-    }
-
-    componentWillMount(){
-      this.props.dispatch(fetchAllActivities(this.state.apiUrl))
-      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
-    }
-
-    render() {
-      return (
-        <Grid>
-          <PageHeader>
-              THE SAN DIEGO CHALLENGE (tm)
-          </PageHeader>
-          <ActivitiesAndMap activities={this.props.allActivities} userID={this.props.userID}/>
-          <NewActivity />
-        </Grid>
-      );
-    }
-
-  }
-)
