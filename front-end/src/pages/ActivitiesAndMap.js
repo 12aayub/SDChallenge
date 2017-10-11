@@ -20,7 +20,7 @@ const MapComponent = compose(
   >
     { props.activities.map((activity) =>{
     return (
-      <Marker position={{ lat: activity.latitude, lng: activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
+      <Marker key={activity.id} position={{ lat: activity.latitude, lng: activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
     )})}
   </GoogleMap>
 )
@@ -32,7 +32,9 @@ class ActivitiesAndMap extends Component {
     super(props);
     this.state = {
       showModal:false,
-      currentActivity: null
+      isMarkerShown: true,
+      currentActivity: null,
+      allActivities: this.props.allActivities
     }
   }
 
@@ -44,7 +46,7 @@ class ActivitiesAndMap extends Component {
         activities={this.props.allActivities}
         />
         <ListGroup>
-          {this.props.allActivities.map((activity) =>{
+          {this.state.allActivities.map((activity) =>{
             return (
               <ListGroupItem key = {activity.id}>
                 <button className = "activity" onClick={this.open.bind(this, activity)}>
