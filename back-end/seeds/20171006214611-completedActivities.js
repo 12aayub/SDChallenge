@@ -24,6 +24,13 @@ module.exports = {
           completedAt: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          userID: 4,
+          activityID: 4,
+          completedAt: new Date(),
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ]
     )

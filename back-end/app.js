@@ -154,9 +154,23 @@ app.post('/login', (req, res) => {
         User.find({ where: {email: req.body.email} }).then((user) => {
             // check users password
             if(user.verifyPassword(req.body.password)){
-              // return user if success
-              res.status(201)
-              res.json({user: user})
+              CompletedActivity.findAll({
+                where: {
+                  userID: user.id,
+                  completedAt: {
+                    $ne: null
+                  }
+                },
+                include: [{
+                  model: Activity
+                }]
+              }).then((results) => {
+                res.status(201)
+                res.json({
+                  completedActivities: results,
+                  user: user
+                })
+              })
             } else {
               res.status(400)
               res.json({errors: {message: "User not found"}})
