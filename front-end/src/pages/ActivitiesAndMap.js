@@ -40,7 +40,7 @@ class ActivitiesAndMap extends Component {
     return (
       <div>
         <MapComponent
-        isMarkerShown={this.state.isMarkerShown}
+        {/* isMarkerShown=true */}
         onMarkerClick={this.open.bind(this)}
         activities={this.props.allActivities}
         />
@@ -65,11 +65,15 @@ class ActivitiesAndMap extends Component {
   }
 
   open(activity) {
-    //if activity matches any id's in completedActivities, then set completed button to "don't show"
     this.setState({
       showModal: true,
       currentActivity: activity
     });
+  }
+
+  complete(activity) {
+    this.setState({ showModal: false })
+    this.props.handleComplete(activity)
   }
 
   modal() {
@@ -82,21 +86,22 @@ class ActivitiesAndMap extends Component {
             <Modal.Title>{this.state.currentActivity.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <p>{this.state.currentActivity.description}</p>
-          <hr/>
-          <h4>Longitude: {this.state.currentActivity.longitude}</h4>
-          <h4>Latitude: {this.state.currentActivity.latitude}</h4>
-            </Modal.Body>
+            <p>{this.state.currentActivity.description}</p>
+            <hr/>
+            <h4>Longitude: {this.state.currentActivity.longitude}</h4>
+            <h4>Latitude: {this.state.currentActivity.latitude}</h4>
+          </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            {/*if currentActivity matches any id's in completedActivities, then show:*/}
-            <button onClick={this.close.bind(this)}>Complete</button>
+            {/*if currentActivity does not match any id's in completedActivities, then show:*/}
+            <button onClick={this.complete.bind(this)}>Complete</button>
+            {/*If there is a match, then show the completed time*/}
           </Modal.Footer>
         </Modal>
         )
       return theModal
-      } else {
-        return <div></div>
+    } else {
+      return <div></div>
     }
   }
 };

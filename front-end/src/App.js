@@ -40,6 +40,10 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(handleUserLogin(this.state.apiUrl, input))
     }
 
+    handleComplete(activity){
+      this.props.dispatch(completeActivity(this.state.apiUrl, activity))
+    }
+
     componentWillMount(){
       this.props.dispatch(checkLogin(this.state.apiUrl))
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
@@ -63,9 +67,39 @@ export default connect(mapComponentToProps)(
                   this.props.user &&
                   <h2>Hello, {this.props.user.name}!</h2>
                 }
-                <ActivitiesAndMap allActivities={this.props.allActivities}/>
-                <CompletedActivities completedactivities={this.props.completedActivities} />
+                <ActivitiesAndMap
+                  allActivities={this.props.allActivities}
+                  completedActivities={this.props.completedActivities}
+                  user={this.props.user}
+                  handleComplete={this.handleComplete.bind(this)}
+                />
+                {
+                  this.props.allActivities &&
+                  <p>This is a test to make sure that allActivities exists: {this.props.allActivities}</p>
+                }
+              </Grid>
+            )}/>
 
+            <Route exact path="/profile" render={props => (
+              <Grid>
+                <PageHeader>
+                  THE SAN DIEGO CHALLENGE
+                </PageHeader>
+                {
+                  !this.props.user &&
+                  <Login onSubmit={this.handleLogin.bind(this)} />
+                }
+                {
+                  this.props.user &&
+                  <h2>Hello, {this.props.user.name}!</h2>
+                }
+                {
+                  this.props.user &&
+                  <CompletedActivities
+                    user={this.props.user}
+                    completedActivities={this.props.completedActivities}
+                  />
+                }
               </Grid>
             )}/>
 
