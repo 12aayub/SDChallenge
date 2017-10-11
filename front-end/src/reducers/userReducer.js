@@ -7,6 +7,7 @@ export default (currentState=initialState, action) =>{
   switch(action.type){
     case("FETCHED_USER"):{
       localStorage.setItem('userEmail', action.payload.email);
+      localStorage.setItem('userID', action.payload.id)
       newState = Object.assign(
         {},
         currentState,

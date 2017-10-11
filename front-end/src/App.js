@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { Grid, PageHeader } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import CompletedActivities from './pages/CompletedActivities'
+
 import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
-import { connect } from 'react-redux'
+import { fetchAllActivities } from './actions/ActivitiesActions'
+import { fetchCompletedActivities } from './actions/ActivitiesActions'
+
 
 const mapComponentToProps = (store) =>{
   return {
     user: store.user.currentUser,
-    userError: store.user.error
+    userError: store.user.error,
+    allActivities: store.allActivities,
+    completedActivities: store.completedActivities
   }
 }
 
@@ -20,51 +28,22 @@ export default connect(mapComponentToProps)(
     constructor(props){
       super(props);
       this.state = {
-        user: null,
-        apiUrl: "http://localhost:3000",
-        newUserSuccess: false,
-        activities: [
-          {
-            id: 1,
-            name: 'Museum',
-            address: '2412 J street',
-            description: 'Visit the Art Museum at Balboa Park.',
-            points: 25,
-            latitude: 32.709536,
-            longitude: -117.158021
-          },
-          {
-            id: 2,
-            name: 'Mission Beach',
-            address: '2131 L street',
-            description: 'Take a walk on the boardwalk. Get a picture of yourself in front of the rollercoaster.',
-            points: 45,
-            latitude: 32.735073,
-            longitude: -117.148412
-          },
-          {
-            id: 3,
-            name: 'Hillcrest Farmer\'s Market',
-            address: '19283 B street',
-            description: 'Visit the Hillcrest Farmer\'s Market on Sunday. Take a pictue in front of your favorite vendor.',
-            points: 44,
-            latitude: 32.722752,
-            longitude: -117.168310
-          }
-        ]
+        apiUrl: "http://localhost:3000"
       }
     }
 
-    handleNewUser(params){
-      this.props.dispatch(addNewUser(this.state.apiUrl, params))
+    handleNewUser(input){
+      this.props.dispatch(addNewUser(this.state.apiUrl, input))
     }
 
-    handleLogin(params){
-      this.props.dispatch(handleUserLogin(this.state.apiUrl, params))
+    handleLogin(input){
+      this.props.dispatch(handleUserLogin(this.state.apiUrl, input))
     }
 
     componentWillMount(){
-        this.props.dispatch(checkLogin(this.state.apiUrl))
+      this.props.dispatch(checkLogin(this.state.apiUrl))
+      this.props.dispatch(fetchAllActivities(this.state.apiUrl))
+      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
     }
 
     render() {
@@ -73,19 +52,19 @@ export default connect(mapComponentToProps)(
           <div>
             <Route exact path="/" render={props => (
               <Grid>
-              <PageHeader>
-              THE SAN DIEGO CHALLENGE (tm)
-              </PageHeader>
-              <p>{this.state.user}</p>
-              {
-                !this.props.user &&
-                <Login onSubmit={this.handleLogin.bind(this)} />
-              }
-              { this.props.user &&
-                <h2>Hello, {this.props.user.name}!</h2>
-              }
-              <ActivitiesAndMap activities={this.state.activities}/>
-              <NewActivity />
+                <PageHeader>
+                  THE SAN DIEGO CHALLENGE
+                </PageHeader>
+                {
+                  !this.props.user &&
+                  <Login onSubmit={this.handleLogin.bind(this)} />
+                }
+                {
+                  this.props.user &&
+                  <h2>Hello, {this.props.user.name}!</h2>
+                }
+                <ActivitiesAndMap allActivities={this.props.allActivities}/>
+                <CompletedActivities completedactivities={this.props.completedActivities} />
 
               </Grid>
             )}/>
@@ -96,6 +75,15 @@ export default connect(mapComponentToProps)(
                   {this.props.user &&
                     <Redirect to="/" />
                   }
+              </Grid>
+            )}/>
+
+            <Route exact path="/activities/new" render={props => (
+              <Grid>
+                {
+                  this.props.user.email=="admin@example.com" &&
+                  <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
+                }
               </Grid>
             )}/>
           </div>

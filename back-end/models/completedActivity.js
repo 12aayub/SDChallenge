@@ -1,14 +1,22 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var completedActivity = sequelize.define('completedActivity', {
-    userId: DataTypes.INTEGER,
-    activityID: DataTypes.INTEGER
+  var CompletedActivity = sequelize.define('CompletedActivity', {
+    userID: DataTypes.INTEGER,
+    activityID: DataTypes.INTEGER,
+    completedAt: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        CompletedActivity.belongsTo(models.Activity,{
+          foreignKey: 'activityID',
+          onDelete: 'CASCADE'
+        }),
+        CompletedActivity.belongsTo(models.User,{
+          foreignKey: 'userID',
+          onDelete: 'CASCADE'
+        })
       }
     }
   });
-  return completedActivity;
+  return CompletedActivity;
 };
