@@ -33,8 +33,7 @@ class ActivitiesAndMap extends Component {
     this.state = {
       showModal:false,
       isMarkerShown: true,
-      currentActivity: null,
-      allActivities: this.props.allActivities
+      currentActivity: null
     }
   }
 
@@ -46,7 +45,7 @@ class ActivitiesAndMap extends Component {
         activities={this.props.allActivities}
         />
         <ListGroup>
-          {this.state.allActivities.map((activity) =>{
+          {this.props.allActivities.map((activity) =>{
             return (
               <ListGroupItem key = {activity.id}>
                 <button className = "activity" onClick={this.open.bind(this, activity)}>

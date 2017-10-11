@@ -7,7 +7,7 @@ import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
-import CompletedActivities from './pages/CompletedActivities'
+import ProfilePage from './pages/ProfilePage'
 
 import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
 import { fetchAllActivities, fetchCompletedActivities, completeActivity } from './actions/ActivitiesActions'
@@ -89,7 +89,7 @@ export default connect(mapComponentToProps)(
                 }
                 {
                   this.props.user &&
-                  <CompletedActivities
+                  <ProfilePage
                     user={this.props.user}
                     completedActivities={this.props.completedActivities}
                   />

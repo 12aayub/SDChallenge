@@ -19,9 +19,9 @@ const MapComponent = compose(
     defaultZoom={12}
     defaultCenter={props.center}
   >
-    { props.activities.map((activity) =>{
+    { props.activities.map((index) =>{
     return (
-      <Marker position={{ lat: activity.latitude, lng: activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
+      <Marker key={index.Activity.id} position={{ lat: index.Activity.latitude, lng: index.Activity.longitude }} onClick={props.onMarkerClick.bind(this, index.Activity)} />
     )})}
   </GoogleMap>
 )
@@ -32,8 +32,8 @@ class CompletedActivities extends Component {
     super(props);
     this.state = {
       showModal:false,
-      currentActivity: null,
-      completedActivities: this.props.completedActivities || []
+      isMarkerShown: true,
+      currentActivity: null
     }
   }
 
@@ -43,20 +43,24 @@ class CompletedActivities extends Component {
         <h3>Here are your completed activities.</h3>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
-        activities={this.state.completedActivities}
+        activities={this.props.completedActivities}
         />
         <ListGroup>
-          {this.state.completedActivities.map((activity) =>{
-            return (
-              <ListGroupItem key = {activity.id}>
+
+        {this.props.completedActivities.map((index) =>{
+          return (
+              <ListGroupItem key = {index.Activity.id}>
                 <div>
-                  <p>Completed At: {activity.completedAt}</p>
-                  <p>User: {activity.userID}</p>
-                  <p>Activity: {activity.Activity.name}</p>
+                  <p>Activity: {index.Activity.name}</p>
+                  <p>Completed At: {index.completedAt}</p>
+                  <p>Description: {index.Activity.description}</p>
+                  <p>Latitude: {index.Activity.latitude}</p>
+                  <p>Longitude: {index.Activity.longitude}</p>
                 </div>
               </ListGroupItem>
             )
-          })}
+        })}
+        {this.modal()}
         </ListGroup>
       </div>
     )
@@ -90,9 +94,6 @@ class CompletedActivities extends Component {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            {/*if currentActivity does not match any id's in completedActivities, then show:*/}
-            <button onClick={this.close.bind(this)}>Complete</button>
-            {/*If there is a match, then show the completed time*/}
           </Modal.Footer>
         </Modal>
         )

@@ -36,7 +36,7 @@ app.get('/activities', (req, res) => {
 // })
 
 app.post('/completedactivities', (req, res) => {
-  CompletedActivity.find({
+  CompletedActivity.findAll({
     where: {
       userID: req.body.id,
       completedAt: {
