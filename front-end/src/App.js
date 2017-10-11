@@ -10,16 +10,14 @@ import Login from './pages/Login'
 import CompletedActivities from './pages/CompletedActivities'
 
 import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
-import { fetchAllActivities } from './actions/ActivitiesActions'
-import { fetchCompletedActivities } from './actions/ActivitiesActions'
-
+import { fetchAllActivities, fetchCompletedActivities, completeActivity } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
   return {
     user: store.user.currentUser,
     userError: store.user.error,
-    allActivities: store.allActivities,
-    completedActivities: store.completedActivities
+    allActivities: store.allActivities.allActivities,
+    completedActivities: store.completedActivities.completedActivities
   }
 }
 
@@ -73,10 +71,6 @@ export default connect(mapComponentToProps)(
                   user={this.props.user}
                   handleComplete={this.handleComplete.bind(this)}
                 />
-                {
-                  this.props.allActivities &&
-                  <p>This is a test to make sure that allActivities exists: {this.props.allActivities}</p>
-                }
               </Grid>
             )}/>
 
@@ -115,7 +109,7 @@ export default connect(mapComponentToProps)(
             <Route exact path="/activities/new" render={props => (
               <Grid>
                 {
-                  this.props.user.email=="admin@example.com" &&
+                  this.props.user.email==="admin@example.com" &&
                   <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
                 }
               </Grid>

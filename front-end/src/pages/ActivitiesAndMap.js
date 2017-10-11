@@ -40,7 +40,6 @@ class ActivitiesAndMap extends Component {
     return (
       <div>
         <MapComponent
-        {/* isMarkerShown=true */}
         onMarkerClick={this.open.bind(this)}
         activities={this.props.allActivities}
         />

@@ -32,21 +32,21 @@ class CompletedActivities extends Component {
     super(props);
     this.state = {
       showModal:false,
-      currentActivity: null
+      currentActivity: null,
+      completedActivities: this.props.completedActivities || []
     }
   }
 
   render() {
     return (
       <div>
-        <h1>Completed Activities</h1>
+        <h3>Here are your completed activities.</h3>
         <MapComponent
-        {/* isMarkerShown=true */}
         onMarkerClick={this.open.bind(this)}
-        activities={this.props.completedActivities}
+        activities={this.state.completedActivities}
         />
         <ListGroup>
-          {this.props.completedActivities.map((activity) =>{
+          {this.state.completedActivities.map((activity) =>{
             return (
               <ListGroupItem key = {activity.id}>
                 <div>

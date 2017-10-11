@@ -41,7 +41,7 @@ export function fetchCompletedActivities(apiUrl){
 }
 
 //action to complete an activity
-export function newCompletion(apiUrl, activityID){
+export function completeActivity(apiUrl, activityID){
   return ((dispatch)=>{
     var userID = localStorage.getItem('userID');
     fetch(`${apiUrl}/completedActivity/new`,

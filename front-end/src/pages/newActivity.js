@@ -9,7 +9,7 @@ import {
   // Alert,
   // HelpBlock
 } from 'react-bootstrap'
-import { createNewActivity } from '../actions/newActivityAction'
+import { createNewActivity } from '../actions/ActivitiesActions'
 
 class NewActivity extends Component {
   constructor(props){
