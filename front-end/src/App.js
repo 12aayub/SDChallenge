@@ -43,9 +43,9 @@ export default connect(mapComponentToProps)(
     }
 
     componentWillMount(){
+      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(checkLogin(this.state.apiUrl))
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
-      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
     }
 
     render() {
@@ -70,6 +70,7 @@ export default connect(mapComponentToProps)(
                   completedActivities={this.props.completedActivities}
                   user={this.props.user}
                   handleComplete={this.handleComplete.bind(this)}
+                  test={this.test.bind(this)}
                 />
               </Grid>
             )}/>
