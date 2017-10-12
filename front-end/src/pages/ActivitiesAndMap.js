@@ -104,17 +104,6 @@ class ActivitiesAndMap extends Component {
     }
   }
 
-// findIncomplete (array1, array2) {
-//     var incomplete = [];
-//     for(var i in array1) {
-//       if(array2.indexOf( array1[i].id ) > -1){
-//         incomplete.push( array1[i] )
-//         console.log(array1[i])
-//       }
-//     }
-//     return incomplete;
-//   };
-
 };
 
 export default ActivitiesAndMap;

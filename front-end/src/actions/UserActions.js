@@ -1,3 +1,4 @@
+//sign up
 export function addNewUser(apiUrl, params){
   return((dispatch)=>{
     fetch(`${apiUrl}/signup`,
@@ -28,6 +29,7 @@ export function addNewUser(apiUrl, params){
   })
 }
 
+//log in
 export function handleUserLogin(apiUrl, params){
   return((dispatch)=>{
     fetch(`${apiUrl}/login`,
@@ -66,6 +68,7 @@ export function handleUserLogin(apiUrl, params){
   })
 }
 
+//check if a user is already logged in
 export function checkLogin(apiUrl){
   return ((dispatch)=>{
     var userEmail = localStorage.getItem('userEmail');

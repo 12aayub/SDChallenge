@@ -94,8 +94,6 @@ export function createNewActivity(apiUrl, form){
       return rawResponse.json()
     })
     .then((parsedResponse) =>{
-        // let newActivity = []
-        // newActivity.push(parsedResponse)
       dispatch({
         type: 'FETCH_ALL_ACTIVITIES',
         payload: parsedResponse.completedActivities

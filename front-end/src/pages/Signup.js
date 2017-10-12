@@ -41,7 +41,6 @@ class Signup extends Component {
             <Row>
               <Col xs={8}>
                 Sign Up
-                <small className='subtitle'>Like now dude!</small>
               </Col>
             </Row>
           </PageHeader>
