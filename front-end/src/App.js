@@ -8,6 +8,9 @@ import NewActivity from './pages/newActivity'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import ProfilePage from './pages/ProfilePage'
+import NavBarUser from './pages/NavbarUser'
+import NavBar from './pages/Navbar'
+import styles from './App.css'
 
 import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
 import {
@@ -60,78 +63,125 @@ export default connect(mapComponentToProps)(
         <Router>
           <div>
             <Route exact path="/" render={props => (
-              <Grid>
-                <PageHeader>
-                  THE SAN DIEGO CHALLENGE
-                </PageHeader>
-                {
-                  !this.props.user &&
-                  <Login onSubmit={this.handleLogin.bind(this)} />
-                }
-                {
-                  !this.props.user &&
-                  <ActivitiesAndMap
-                    activities={this.props.allActivities}
-                    user={this.props.user}
-                    handleComplete={this.handleComplete.bind(this)}
-                  />
-                }
+              <div className = "App">
+                <video id="background-video" loop autoPlay>
+                  <source src='../Sunset-Siesta.mp4' type="video/mp4" />
+                  <source src='../Sunset-Siesta.mp4' type="video/ogg" />
+                </video>
                 {
                   this.props.user &&
-                  <div>
-                      <h2>Hello, {this.props.user.name}!</h2>
-                      <h3>Here are the challenges you have yet to complete:</h3>
+                  <NavBarUser/>
+                }
+                {
+                  !this.props.user &&
+                  <NavBar/>
+                }
+                <Grid>
+                  <PageHeader>
+                    THE SAN DIEGO CHALLENGE
+                  </PageHeader>
+                  {
+                    !this.props.user &&
                     <ActivitiesAndMap
-                      activities={this.props.unfinishedActivities}
+                      activities={this.props.allActivities}
                       user={this.props.user}
                       handleComplete={this.handleComplete.bind(this)}
                     />
-                  </div>
-                }
-              </Grid>
+                  }
+                  {
+                    this.props.user &&
+                    <div>
+                        <h2>Hello, {this.props.user.name}!</h2>
+                        <h3>Here are the challenges you have yet to complete:</h3>
+                      <ActivitiesAndMap
+                        activities={this.props.unfinishedActivities}
+                        user={this.props.user}
+                        handleComplete={this.handleComplete.bind(this)}
+                      />
+                    </div>
+                  }
+                </Grid>
+              </div>
             )}/>
 
             <Route exact path="/profile" render={props => (
-              <Grid>
-                <PageHeader>
-                  THE SAN DIEGO CHALLENGE
-                </PageHeader>
-                {
-                  !this.props.user &&
-                  <Login onSubmit={this.handleLogin.bind(this)} />
-                }
-                {
-                  this.props.user &&
-                  <div>
-                    <h2>Hello, {this.props.user.name}!</h2>
-                    <ProfilePage
-                      user={this.props.user}
-                      completedActivities={this.props.completedActivities}
-                    />
-                  </div>
-                }
-              </Grid>
+              <div className = "App">
+                <video id="background-video" loop autoPlay>
+                  <source src='../Sunset-Siesta.mp4' type="video/mp4" />
+                  <source src='../Sunset-Siesta.mp4' type="video/ogg" />
+                </video>
+                <NavBarUser/>
+                <Grid>
+                  <PageHeader>
+                    THE SAN DIEGO CHALLENGE
+                  </PageHeader>
+                  {
+                    this.props.user &&
+                    <div>
+                      <h2>Hello, {this.props.user.name}!</h2>
+                      <ProfilePage
+                        user={this.props.user}
+                        completedActivities={this.props.completedActivities}
+                      />
+                    </div>
+                  }
+                  
+                </Grid>
+              </div>
             )}/>
 
             <Route exact path="/signup" render={props => (
-              <Grid>
-                <PageHeader>
-                  THE SAN DIEGO CHALLENGE
-                </PageHeader>
-                <Signup onSubmit={this.handleNewUser.bind(this)} />
-                  {this.props.user &&
-                    <Redirect to="/" />
-                  }
-              </Grid>
+              <div className = "App">
+                <video id="background-video" loop autoPlay>
+                  <source src='../Sunset-Siesta.mp4' type="video/mp4" />
+                  <source src='../Sunset-Siesta.mp4' type="video/ogg" />
+                </video>
+                <NavBar/>
+                <Grid>
+                  <PageHeader>
+                    THE SAN DIEGO CHALLENGE
+                  </PageHeader>
+                  <Signup onSubmit={this.handleNewUser.bind(this)} />
+                    {this.props.user &&
+                      <Redirect to="/" />
+                    }
+                </Grid>
+              </div>
+            )}/>
+
+            <Route exact path="/login" render={props => (
+              <div className = "App">
+                <video id="background-video" loop autoPlay>
+                  <source src='../Sunset-Siesta.mp4' type="video/mp4" />
+                  <source src='../Sunset-Siesta.mp4' type="video/ogg" />
+                </video>
+                <NavBar/>
+                <Grid>
+                  <PageHeader>
+                    THE SAN DIEGO CHALLENGE
+                  </PageHeader>
+                  <Login onSubmit={this.handleLogin.bind(this)} />
+                    {this.props.user &&
+                      <Redirect to="/" />
+                    }
+                </Grid>
+              </div>
             )}/>
 
             <Route exact path="/activities/new" render={props => (
-              <Grid>
-                {
-                  this.props.user.email==="admin@example.com" &&
-                  <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
-                }
-              </Grid>
+              <div className = "App">
+                <video id="background-video" loop autoPlay>
+                  <source src='../Sunset-Siesta.mp4' type="video/mp4" />
+                  <source src='../Sunset-Siesta.mp4' type="video/ogg" />
+                </video>
+                <NavBar/>
+                <Grid>
+                  {
+                    this.props.user.email==="admin@example.com" &&
+                    <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
+                  }
+                </Grid>
+              </div>
             )}/>
           </div>
         </Router>

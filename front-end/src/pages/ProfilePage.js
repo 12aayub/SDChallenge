@@ -2,25 +2,27 @@ import React, { Component } from 'react'
 import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+const MapStyles = require("./MapStyles.json")
 
 const MapComponent = compose(
-  withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px`, padding: `20px`}} />,
-    mapElement: <div style={{ height: `100%` }} />,
-    center: { lat: 32.722752, lng: -117.168310 }
-  }),
-    withScriptjs,
-    withGoogleMap
+withProps({
+  googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
+  loadingElement: <div style={{ height: `100%` }} />,
+  containerElement: <div className= "mapContainer" style={{ height: `400px`, width:`49%`, display:`inline-block`}} />,
+  mapElement: <div style={{ height: `100%`}} />,
+  center: { lat: 32.722752, lng: -117.168310 },
+}),
+withScriptjs,
+withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={12}
+    defaultZoom={11}
     defaultCenter={props.center}
+    defaultOptions={{ styles:MapStyles }}
   >
-    { props.activities.map((index) =>{
-    return (
-      <Marker key={index.Activity.id} position={{ lat: index.Activity.latitude, lng: index.Activity.longitude }} onClick={props.onMarkerClick.bind(this, index.Activity)} />
+    { props.activities.map((activity) =>{
+      return (
+      <Marker key={activity.Activity.id} position={{ lat: activity.Activity.latitude, lng: activity.Activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
     )})}
   </GoogleMap>
 )
@@ -44,26 +46,28 @@ class CompletedActivities extends Component {
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}
         />
-        <ListGroup>
-
-        {this.props.completedActivities.map((index) =>{
-          return (
-              <ListGroupItem key = {index.Activity.id}>
-                <div>
-                  <p>Activity: {index.Activity.name}</p>
-                  <p>Completed At: {
-                    new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
-                  }
-                  </p>
-                  <p>Description: {index.Activity.description}</p>
-                  <p>Latitude: {index.Activity.latitude}</p>
-                  <p>Longitude: {index.Activity.longitude}</p>
-                </div>
-              </ListGroupItem>
-            )
-        })}
-        {this.modal()}
-        </ListGroup>
+        <div id = "challengesSection">
+          <h4 id = "challengesTitle">COMPLETED CHALLENGES</h4>
+          <ListGroup className = "activityList">
+          {this.props.completedActivities.map((index) =>{
+            return (
+                <ListGroupItem key = {index.Activity.id} className = "activity">
+                  <div>
+                    <p>Activity: {index.Activity.name}</p>
+                    <p>Completed At: {
+                      new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
+                    }
+                    </p>
+                    <p>Description: {index.Activity.description}</p>
+                    <p>Latitude: {index.Activity.latitude}</p>
+                    <p>Longitude: {index.Activity.longitude}</p>
+                  </div>
+                </ListGroupItem>
+              )
+          })}
+          {this.modal()}
+          </ListGroup>
+        </div>
       </div>
     )
   }
