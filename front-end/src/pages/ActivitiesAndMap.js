@@ -26,6 +26,7 @@ const MapComponent = compose(
 )
 
 
+
 class ActivitiesAndMap extends Component {
 
   constructor(props){
@@ -42,10 +43,10 @@ class ActivitiesAndMap extends Component {
       <div>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
-        activities={this.props.allActivities}
+        activities={this.props.activities}
         />
         <ListGroup>
-          {this.props.allActivities.map((activity) =>{
+          {this.props.activities.map((activity) =>{
             return (
               <ListGroupItem key = {activity.id}>
                 <button className = "activity" onClick={this.open.bind(this, activity)}>
@@ -73,7 +74,7 @@ class ActivitiesAndMap extends Component {
 
   complete(activity) {
     this.setState({ showModal: false })
-    this.props.handleComplete(activity)
+    this.props.handleComplete(activity.id)
   }
 
   modal() {
@@ -93,9 +94,7 @@ class ActivitiesAndMap extends Component {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            {/*if currentActivity does not match any id's in completedActivities, then show:*/}
-            <button onClick={this.complete.bind(this)}>Complete</button>
-            {/*If there is a match, then show the completed time*/}
+            <button onClick={this.complete.bind(this, this.state.currentActivity)}>Complete</button>
           </Modal.Footer>
         </Modal>
         )
@@ -104,6 +103,18 @@ class ActivitiesAndMap extends Component {
       return <div></div>
     }
   }
+
+// findIncomplete (array1, array2) {
+//     var incomplete = [];
+//     for(var i in array1) {
+//       if(array2.indexOf( array1[i].id ) > -1){
+//         incomplete.push( array1[i] )
+//         console.log(array1[i])
+//       }
+//     }
+//     return incomplete;
+//   };
+
 };
 
 export default ActivitiesAndMap;
