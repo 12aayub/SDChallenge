@@ -76,22 +76,6 @@ app.post('/completedActivity/new', (req, res) => {
   })
 })
 
-// app.get('/completedactivities/:id', (req, res) => {
-//   CompletedActivity.findAll({
-//     where: {
-//       userID: req.params["id"],
-//       completedAt: {
-//         $ne: null
-//       }
-//     },
-//     include: [{
-//       model: Activity
-//     }]
-//   }).then( (completedactivities) =>{
-//     res.json({completedactivities: completedactivities})
-//   })
-// })
-
 app.post('/activities/new', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('description', 'Is required').notEmpty()
@@ -110,10 +94,6 @@ app.post('/activities/new', (req, res) => {
         .then((activities) => {
             res.json({activities:activities})
             })
-        // }).then((activity)=>{
-        //   res.status(201)
-        //   res.json({activity: activity})
-        // })
       }else{
         res.status(400)
         res.json({errors: {validations: validationErrors.array()}})
