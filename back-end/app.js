@@ -55,10 +55,22 @@ app.post('/completedactivities', (req, res) => {
   })
 })
 
+app.get('/unfinishedactivities/:id', (req, res) => {
+  Activity.sequelize.query('SELECT * FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.params.id}})
+  .then((results) => {
+    res.status(201)
+    res.json({unfinishedActivities: results[0]})
+  }).catch((error) => {
+    res.status(400)
+    res.json({errors: {message: "Activities not found"}})
+  })
+})
+
 app.post('/completedActivity/new', (req, res) => {
   CompletedActivity.create({
     userID: req.body.id,
-    activityID: req.body.actID
+    activityID: req.body.actID,
+    completedAt: new Date()
   })
   CompletedActivity.find({
     where: {

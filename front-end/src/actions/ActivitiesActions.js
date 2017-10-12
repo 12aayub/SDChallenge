@@ -40,6 +40,24 @@ export function fetchCompletedActivities(apiUrl){
   })
 }
 
+export function fetchUnfinishedActivities(apiUrl){
+  return ((dispatch)=>{
+    var userID = localStorage.getItem('userID');
+    if(userID){
+      fetch(`${apiUrl}/unfinishedactivities/${userID}`)
+      .then((rawResponse)=>{
+        return rawResponse.json()
+      }).then((parsedResponse) => {
+        debugger
+        dispatch({
+          type: 'FETCH_UNFINISHED_ACTIVITIES',
+          payload: parsedResponse.unfinishedActivities
+        })
+      })
+    }
+  })
+}
+
 //action to complete an activity
 export function completeActivity(apiUrl, activityID){
   return ((dispatch)=>{

@@ -39,7 +39,7 @@ class CompletedActivities extends Component {
   render() {
     return (
       <div>
-        <h3>Here are your completed activities.</h3>
+        <h3>Here are the challenges you have completed:</h3>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}

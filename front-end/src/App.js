@@ -10,14 +10,20 @@ import Login from './pages/Login'
 import ProfilePage from './pages/ProfilePage'
 
 import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
-import { fetchAllActivities, fetchCompletedActivities, completeActivity } from './actions/ActivitiesActions'
+import {
+  fetchAllActivities,
+  fetchCompletedActivities,
+  completeActivity,
+  fetchUnfinishedActivities
+} from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
   return {
     user: store.user.currentUser,
     userError: store.user.error,
     allActivities: store.allActivities.allActivities,
-    completedActivities: store.completedActivities.completedActivities
+    completedActivities: store.completedActivities.completedActivities,
+    unfinishedActivities: store.unfinishedActivities.unfinishedActivities
   }
 }
 
@@ -46,6 +52,9 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(checkLogin(this.state.apiUrl))
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
+      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
+      this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
+
     }
 
     render() {
@@ -63,15 +72,27 @@ export default connect(mapComponentToProps)(
                 }
                 {
                   this.props.user &&
-                  <h2>Hello, {this.props.user.name}!</h2>
+                  <div>
+                    <h2>Hello, {this.props.user.name}!</h2>
+                    <h3>Here are the challenges you have yet to complete:</h3>
+                  </div>
                 }
-                <ActivitiesAndMap
-                  allActivities={this.props.allActivities}
-                  completedActivities={this.props.completedActivities}
-                  user={this.props.user}
-                  handleComplete={this.handleComplete.bind(this)}
-                  test={this.test.bind(this)}
-                />
+                {
+                  this.props.user &&
+                  <ActivitiesAndMap
+                    activities={this.props.unfinishedActivities}
+                    user={this.props.user}
+                    handleComplete={this.handleComplete.bind(this)}
+                  />
+                }
+                {
+                  !this.props.user &&
+                  <ActivitiesAndMap
+                    activities={this.props.allActivities}
+                    user={this.props.user}
+                    handleComplete={this.handleComplete.bind(this)}
+                  />
+                }
               </Grid>
             )}/>
 
