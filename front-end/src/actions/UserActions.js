@@ -53,6 +53,10 @@ export function handleUserLogin(apiUrl, params){
             type: 'FETCHED_USER',
             payload: parsedResponse.user
           })
+          dispatch({
+            type: 'FETCH_COMPLETED_ACTIVITIES',
+            payload: parsedResponse.completedActivities
+          })
         }
     })
   })

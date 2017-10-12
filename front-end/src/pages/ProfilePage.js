@@ -3,7 +3,6 @@ import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-
 const MapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
@@ -52,7 +51,10 @@ class CompletedActivities extends Component {
               <ListGroupItem key = {index.Activity.id}>
                 <div>
                   <p>Activity: {index.Activity.name}</p>
-                  <p>Completed At: {index.completedAt}</p>
+                  <p>Completed At: {
+                    new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
+                  }
+                  </p>
                   <p>Description: {index.Activity.description}</p>
                   <p>Latitude: {index.Activity.latitude}</p>
                   <p>Longitude: {index.Activity.longitude}</p>

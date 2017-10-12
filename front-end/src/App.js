@@ -49,10 +49,12 @@ export default connect(mapComponentToProps)(
     }
 
     componentWillMount(){
+      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(checkLogin(this.state.apiUrl))
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
+
     }
 
     render() {
@@ -91,7 +93,6 @@ export default connect(mapComponentToProps)(
                     handleComplete={this.handleComplete.bind(this)}
                   />
                 }
-
               </Grid>
             )}/>
 
