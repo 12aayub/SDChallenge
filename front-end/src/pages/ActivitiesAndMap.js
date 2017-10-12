@@ -73,9 +73,34 @@ class ActivitiesAndMap extends Component {
   }
 
   complete(activity) {
-    this.setState({ showModal: false })
-    this.props.handleComplete(activity.id)
+    let self = this
+    //changing the button text doesn't work yet :( so sad
+    document.getElementById("completeButton").innerText = "Locating..."
+    window.navigator.geolocation.getCurrentPosition(function(pos){
+      var R = 6371
+      var dLat = (activity.latitude-pos.coords.latitude)
+      var dLon = (activity.longitude-pos.coords.longitude)
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(pos.coords.latitude) * Math.cos(activity.latitude) *
+              Math.sin(dLon/2) * Math.sin(dLon/2)
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      var d = R * c
+      console.log(d < 100);
+      if( d < 100 ){
+        self.props.handleComplete(activity.id)
+        self.setState({ showModal: false })
+        alert("Congrats on completing an activity! Keep it up!")
+        document.getElementById("completeButton").innerText = "Complete"
+      } else {
+        self.setState({ showModal: false })
+        alert("You are outside of the activity's location. Get closer!")
+        console.log("d is greater than 100");
+        document.getElementById("completeButton").innerText = "Complete"
+
+      }
+    })
   }
+
 
   modal() {
     if(this.state.currentActivity){
@@ -94,7 +119,7 @@ class ActivitiesAndMap extends Component {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            <button onClick={this.complete.bind(this, this.state.currentActivity)}>Complete</button>
+            <button id="completeButton" onClick={this.complete.bind(this, this.state.currentActivity)}>Complete</button>
           </Modal.Footer>
         </Modal>
         )
