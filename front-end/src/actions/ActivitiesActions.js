@@ -48,7 +48,6 @@ export function fetchUnfinishedActivities(apiUrl){
       .then((rawResponse)=>{
         return rawResponse.json()
       }).then((parsedResponse) => {
-        debugger
         dispatch({
           type: 'FETCH_UNFINISHED_ACTIVITIES',
           payload: parsedResponse.unfinishedActivities

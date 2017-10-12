@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { handleUserLogout } from '../actions/UserActions'
+
+
 
 const MapComponent = compose(
   withProps({
@@ -26,6 +29,9 @@ const MapComponent = compose(
 )
 
 class CompletedActivities extends Component {
+  handleLogout(){
+    this.props.onSubmit(handleUserLogout)
+      }
 
   constructor(props){
     super(props);
@@ -44,6 +50,9 @@ class CompletedActivities extends Component {
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}
         />
+        <Button
+          onClick={this.handleLogout.bind(this)}
+        id="submit">Log Out</Button>
         <ListGroup>
 
         {this.props.completedActivities.map((index) =>{

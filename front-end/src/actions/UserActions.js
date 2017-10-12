@@ -62,6 +62,16 @@ export function handleUserLogin(apiUrl, params){
   })
 }
 
+export function handleUserLogout() {
+  return ((dispatch) => {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userID');
+    dispatch({
+      type: 'REMOVE_USER'
+    })
+  })
+}
+
 export function checkLogin(apiUrl){
   return ((dispatch)=>{
     var userEmail = localStorage.getItem('userEmail');

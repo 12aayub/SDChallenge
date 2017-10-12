@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, PageHeader } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
 
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
@@ -9,7 +9,7 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import ProfilePage from './pages/ProfilePage'
 
-import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
+import { addNewUser, checkLogin, handleUserLogin, handleUserLogout } from './actions/UserActions'
 import {
   fetchAllActivities,
   fetchCompletedActivities,
@@ -48,6 +48,10 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(completeActivity(this.state.apiUrl, activity))
     }
 
+    handleLogout(){
+      this.props.dispatch(handleUserLogout())
+    }
+
     componentWillMount(){
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(checkLogin(this.state.apiUrl))
@@ -66,6 +70,7 @@ export default connect(mapComponentToProps)(
                 <PageHeader>
                   THE SAN DIEGO CHALLENGE
                 </PageHeader>
+                <Link to="/profile"> Profile </Link>
                 {
                   !this.props.user &&
                   <Login onSubmit={this.handleLogin.bind(this)} />
@@ -103,7 +108,7 @@ export default connect(mapComponentToProps)(
                 </PageHeader>
                 {
                   !this.props.user &&
-                  <Login onSubmit={this.handleLogin.bind(this)} />
+                  <Redirect to="/" />
                 }
                 {
                   this.props.user &&
@@ -114,7 +119,7 @@ export default connect(mapComponentToProps)(
                   <ProfilePage
                     user={this.props.user}
                     completedActivities={this.props.completedActivities}
-                  />
+                    onSubmit={this.handleLogout.bind(this)} />
                 }
               </Grid>
             )}/>

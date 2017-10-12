@@ -7,6 +7,6 @@ import { combineReducers } from 'redux'
 export default combineReducers({
   allActivities: allActivitiesReducer,
   completedActivities: completedActivitiesReducer,
-  unfinishedActivities: unfinishedActivitiesReducer,
-  user: userReducer
+  user: userReducer,
+  unfinishedActivities: unfinishedActivitiesReducer
 })
