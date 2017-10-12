@@ -57,6 +57,10 @@ export function handleUserLogin(apiUrl, params){
             type: 'FETCH_COMPLETED_ACTIVITIES',
             payload: parsedResponse.completedActivities
           })
+          dispatch({
+            type: 'FETCH_UNFINISHED_ACTIVITIES',
+            payload: parsedResponse.unfinishedActivities
+          })
         }
     })
   })

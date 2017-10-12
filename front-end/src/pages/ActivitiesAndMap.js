@@ -46,16 +46,16 @@ class ActivitiesAndMap extends Component {
         activities={this.props.activities}
         />
         <ListGroup>
-          {this.props.activities.map((activity) =>{
-            return (
-              <ListGroupItem key = {activity.id}>
-                <button className = "activity" onClick={this.open.bind(this, activity)}>
-                  {activity.name}
-                </button>
-                {this.modal()}
-              </ListGroupItem>
-            )
-          })}
+        {this.props.activities.map((activity) =>{
+          return (
+            <ListGroupItem key = {activity.id}>
+              <button className = "activity" onClick={this.open.bind(this, activity)}>
+                {activity.name}
+              </button>
+              {this.modal()}
+            </ListGroupItem>
+          )
+        })}
         </ListGroup>
       </div>
     );

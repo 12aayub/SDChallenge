@@ -49,12 +49,10 @@ export default connect(mapComponentToProps)(
     }
 
     componentWillMount(){
-      this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(checkLogin(this.state.apiUrl))
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
-
     }
 
     render() {
@@ -71,27 +69,24 @@ export default connect(mapComponentToProps)(
                   <Login onSubmit={this.handleLogin.bind(this)} />
                 }
                 {
-                  this.props.user &&
-                  <div>
-                    <h2>Hello, {this.props.user.name}!</h2>
-                    <h3>Here are the challenges you have yet to complete:</h3>
-                  </div>
-                }
-                {
-                  this.props.user &&
-                  <ActivitiesAndMap
-                    activities={this.props.unfinishedActivities}
-                    user={this.props.user}
-                    handleComplete={this.handleComplete.bind(this)}
-                  />
-                }
-                {
                   !this.props.user &&
                   <ActivitiesAndMap
                     activities={this.props.allActivities}
                     user={this.props.user}
                     handleComplete={this.handleComplete.bind(this)}
                   />
+                }
+                {
+                  this.props.user &&
+                  <div>
+                      <h2>Hello, {this.props.user.name}!</h2>
+                      <h3>Here are the challenges you have yet to complete:</h3>
+                    <ActivitiesAndMap
+                      activities={this.props.unfinishedActivities}
+                      user={this.props.user}
+                      handleComplete={this.handleComplete.bind(this)}
+                    />
+                  </div>
                 }
               </Grid>
             )}/>
@@ -107,20 +102,22 @@ export default connect(mapComponentToProps)(
                 }
                 {
                   this.props.user &&
-                  <h2>Hello, {this.props.user.name}!</h2>
-                }
-                {
-                  this.props.user &&
-                  <ProfilePage
-                    user={this.props.user}
-                    completedActivities={this.props.completedActivities}
-                  />
+                  <div>
+                    <h2>Hello, {this.props.user.name}!</h2>
+                    <ProfilePage
+                      user={this.props.user}
+                      completedActivities={this.props.completedActivities}
+                    />
+                  </div>
                 }
               </Grid>
             )}/>
 
             <Route exact path="/signup" render={props => (
               <Grid>
+                <PageHeader>
+                  THE SAN DIEGO CHALLENGE
+                </PageHeader>
                 <Signup onSubmit={this.handleNewUser.bind(this)} />
                   {this.props.user &&
                     <Redirect to="/" />
