@@ -2906,13 +2906,10 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-<<<<<<< HEAD
 google-maps-infobox@^1.1.13:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/google-maps-infobox/-/google-maps-infobox-1.1.15.tgz#22a28a97cf72a2cd8493eef755c71fc1a2995170"
 
-=======
->>>>>>> e8cd0f835cf82107e73ec23c573be907106211b3
 google-maps-react@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/google-maps-react/-/google-maps-react-1.1.0.tgz#eb5b36083fb32fa605ec63edb46bfb92c6fbe184"
@@ -5423,13 +5420,6 @@ react-error-overlay@^2.0.2:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
-react-google-map@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/react-google-map/-/react-google-map-3.1.0.tgz#8fe05f22f4900bba6097ba84d5ecc4572bbd2265"
-  dependencies:
-    prop-types "^15.6.0"
-
-<<<<<<< HEAD
 react-google-maps@^8.3.4:
   version "8.3.4"
   resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.4.tgz#883ece40f092a191c32cd0cd475b0b15a44f0907"
@@ -5445,8 +5435,6 @@ react-google-maps@^8.3.4:
     scriptjs "^2.5.8"
     warning "^3.0.0"
 
-=======
->>>>>>> e8cd0f835cf82107e73ec23c573be907106211b3
 react-overlays@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.1.tgz#0b84708d8007082163c47155a2f60a0858c7a3c7"
