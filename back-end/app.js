@@ -118,7 +118,6 @@ app.post('/signup', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
-
   req.getValidationResult()
     .then((validationErrors) =>{
       if(validationErrors.isEmpty()){
@@ -127,8 +126,38 @@ app.post('/signup', (req, res) => {
           email: req.body.email,
           password: req.body.password
         }).then((user)=>{
-          res.status(201)
-          res.json({user: user})
+          if(user.verifyPassword(req.body.password)){
+            CompletedActivity.findAll({
+              where: {
+                userID: user.id,
+                completedAt: {
+                  $ne: null
+                }
+              },
+              include: [{
+                model: Activity
+              }]
+            }).then((results) => {
+              Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
+              .then((unfinished) => {
+                res.status(201)
+                res.json({
+                  completedActivities: results,
+                  unfinishedActivities: unfinished[0],
+                  user: user
+                })
+              }).catch((error) => {
+                res.status(400)
+                res.json({errors: {message: "Activities not found"}})
+              })
+            })
+          } else {
+            res.status(400)
+            res.json({errors: {message: "User not found"}})
+          }
+        }).catch((error) => {
+          res.status(400)
+          res.json({errors: {message: "User not found"}})
         })
       }else{
         res.status(400)

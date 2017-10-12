@@ -24,6 +24,14 @@ export function addNewUser(apiUrl, params){
           type: 'FETCHED_USER',
           payload: parsedResponse.user
         })
+        dispatch({
+          type: 'FETCH_COMPLETED_ACTIVITIES',
+          payload: parsedResponse.completedActivities
+        })
+        dispatch({
+          type: 'FETCH_UNFINISHED_ACTIVITIES',
+          payload: parsedResponse.unfinishedActivities
+        })
       }
     })
   })
