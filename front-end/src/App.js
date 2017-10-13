@@ -188,10 +188,10 @@ export default connect(mapComponentToProps)(
                 </video>
                 <NavBar/>
                 <Grid>
-                  {
+                  {/*
                     this.props.user.email==="admin@example.com" &&
                     <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
-                  }
+                  */}
                 </Grid>
               </div>
             )}/>

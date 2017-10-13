@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-const MapStyles = require("./MapStyles.json")
 import { handleUserLogout } from '../actions/UserActions'
+const MapStyles = require("./MapStyles.json")
 
 
 const MapComponent = compose(
