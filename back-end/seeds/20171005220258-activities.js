@@ -99,7 +99,7 @@ module.exports = {
           description: 'If you want to drink SoCal craft beer, make a stop at Bier Garden! All 32 tap handles feature beers from Southern California--they also have a retro cocktail menu. In terms of food, you\'ll be able to enjoy California coastal, local, and bier infused cuisine. After a couple drinks, walk around and enjoy the prototypical southern ambience. Find Moonlight Beach and watch the sunset!',
           address: '641 S Coast Highway 101, Encinitas, CA',
           latitude: 33.0441042,
-          longitude: 117.2933546,
+          longitude: -117.2933546,
           createdAt: new Date(),
           updatedAt: new Date()
         },
