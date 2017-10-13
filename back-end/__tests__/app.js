@@ -11,24 +11,28 @@ describe("App", ()=>{
       expect(response.statusCode).toBe(200)
     })
   })
+
   it ("Lists activities", ()=>{
   return request(app).get("/activities").then(response =>{
     expect(response.statusCode).toBe(200)
     expect(response.body.activities[0].name).toBe('Stalk Aaron')
     })
   })
+
   it ("Lists users", ()=>{
   return request(app).get("/users").then(response =>{
     expect(response.statusCode).toBe(200)
     expect(response.body.users[0].firstName).toBe('Kathy')
     })
   })
-  it ("Lists completed activities ID", ()=>{
-  return request(app).get("/completedactivities").then(response =>{
+
+  it ("Lists completed activities", ()=>{
+  return request(app).get("/completedactivities/").then(response =>{
     expect(response.statusCode).toBe(200)
-    expect(response.body.completedactivities[0].activityID).toBe(1)
+    expect(response.body.completedactivities[0].userID).toBe(1)
     })
   })
+
   it("Creates activities", ()=>{
   return request(app)
     .post("/activities")
@@ -46,6 +50,7 @@ describe("App", ()=>{
       expect(response.body.activity.latitude).toBe(-117.1601878)
     })
   })
+
   it("Creates users", ()=>{
   return request(app)
     .post("/users")
@@ -61,6 +66,7 @@ describe("App", ()=>{
       expect(response.body.user.email).toBe('cornnutfan3200@kraft.com')
     })
   })
+
   it("Validates name when creating activity", ()=>{
     return request(app)
       .post("/activities")
@@ -76,6 +82,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
       })
   })
+
   it("Validates description when creating activity", ()=>{
     return request(app)
       .post("/activities")
@@ -91,6 +98,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
       })
   })
+
   it("Validates longitude when creating activity", ()=>{
     return request(app)
       .post("/activities")
@@ -107,6 +115,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
       })
   })
+
   it("Validates latitude when creating activity", ()=>{
     return request(app)
       .post("/activities")
@@ -122,6 +131,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
       })
   })
+
   it("Validates firstName when creating user", ()=>{
     return request(app)
       .post("/users")
@@ -136,6 +146,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
       })
     })
+
   it("Validates lastName when creating activity", ()=>{
     return request(app)
       .post("/users")
@@ -150,6 +161,7 @@ describe("App", ()=>{
         expect(error.msg).toBe('Is required')
         })
     })
+
   it("Validates email when creating activity", ()=>{
     return request(app)
       .post("/users")

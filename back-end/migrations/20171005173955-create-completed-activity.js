@@ -1,18 +1,22 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('completedActivities', {
+    return queryInterface.createTable('CompletedActivities', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      userID: {
         type: Sequelize.INTEGER
       },
       activityID: {
         type: Sequelize.INTEGER
+      },
+      completedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +29,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('completedActivities');
+    return queryInterface.dropTable('CompletedActivities');
   }
 };
