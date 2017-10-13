@@ -20,14 +20,14 @@ class NavBar extends Component {
            </Navbar.Header>
            <Navbar.Collapse>
              <Nav pullRight>
-               <NavItem eventKey={1} href="/signup">
+               <MenuItem eventKey={1} href="/signup">
                   <span className="glyphicon glyphicon-user"></span>
                   Sign Up
-                </NavItem>
-               <NavItem eventKey={2} href="/login">
+                </MenuItem>
+               <MenuItem eventKey={2} href="/login">
                   <span className="glyphicon glyphicon-log-in"></span>
                   Login
-                </NavItem>
+                </MenuItem>
              </Nav>
            </Navbar.Collapse>
          </Navbar>

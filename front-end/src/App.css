@@ -72,9 +72,16 @@ border-style: ridge;
 
 
 /*Modal Styles*/
+
+.modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+}
 .modal-backdrop
 {
-    opacity:0.25 !important;
+    opacity:0.1 !important;
 }
 #locationIcon{
   margin:10px;
@@ -89,10 +96,11 @@ border-style: ridge;
 .modal-footer{
   background-color:#ffeee6;
 }
-/*#modalPoints{
+#modalAddress{
   float:left;
-  font-family: 'Josefin Sans', sans-serif;
-}*/
+  width:50%
+}
+
 #closeButton{
   background-color: transparent;
   border: solid 2px black;

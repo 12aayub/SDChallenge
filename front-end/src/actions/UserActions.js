@@ -78,7 +78,7 @@ export function handleUserLogin(apiUrl, params){
 
 export function handleUserLogout() {
   return ((dispatch) => {
-    localStorage.removeItem('userEmail');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('userID');
     dispatch({
       type: 'REMOVE_USER'
@@ -89,11 +89,11 @@ export function handleUserLogout() {
 //check if a user is already logged in
 export function checkLogin(apiUrl){
   return ((dispatch)=>{
-    var userEmail = localStorage.getItem('userEmail');
-    if(userEmail){
+    var authToken = localStorage.getItem('authToken');
+    if(authToken){
       fetch(`${apiUrl}/user`,
         {
-          body: JSON.stringify({email: userEmail}),
+          body: JSON.stringify({authToken: authToken}),
           headers: {
             'Content-Type': 'application/json'
           },

@@ -116,13 +116,12 @@ class ActivitiesAndMap extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>{this.state.currentActivity.description}</h4>
-            <p>{this.state.currentActivity.address}</p>
+            <h5>{this.state.currentActivity.description}</h5>
 
           </Modal.Body>
           <Modal.Footer>
-            {/*<h4 id = "modalPoints">POINTS: {this.state.currentActivity.points} </h4>*/}
-            <button id = "completeButton" onClick={this.complete.bind(this, this.state.currentActivity)}>COMPLETED<span className="glyphicon glyphicon-check"></span></button>
+            <div id = "modalAddress"><p>{this.state.currentActivity.address} </p></div>
+            <button id = "completeButton" onClick={this.complete.bind(this, this.state.currentActivity)}>COMPLETE<span className="glyphicon glyphicon-check"></span></button>
             <button id = "closeButton" onClick={this.close.bind(this)}>CLOSE</button>
           </Modal.Footer>
         </Modal>
