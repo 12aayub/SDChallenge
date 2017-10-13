@@ -31,7 +31,7 @@ class NewActivity extends Component {
   }
 
   handleSubmit(){
-    this.props.dispatch(createNewActivity(this.props.apiUrl, this.state.form))
+    this.props.onSubmit(this.state.form)
   }
 
   render() {

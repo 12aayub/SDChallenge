@@ -17,7 +17,8 @@ import {
   fetchAllActivities,
   fetchCompletedActivities,
   completeActivity,
-  fetchUnfinishedActivities
+  fetchUnfinishedActivities,
+  createNewActivity
 } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
@@ -37,6 +38,10 @@ export default connect(mapComponentToProps)(
       this.state = {
         apiUrl: "http://localhost:3000"
       }
+    }
+
+    handleNewActivity(input){
+      this.props.dispatch(createNewActivity(this.state.apiUrl, input))
     }
 
     handleNewUser(input){
@@ -64,6 +69,7 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
+      console.log(this.props)
     }
 
     render() {
@@ -88,6 +94,10 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
+                  {
+                    this.props.user && (this.props.user.name==="Admin") &&
+                    <Link to="/addactivity">Add Activity Page</Link>
+                  }
                   {
                     !this.props.user &&
                     <ActivitiesAndMap
@@ -177,7 +187,7 @@ export default connect(mapComponentToProps)(
               </div>
             )}/>
 
-            <Route exact path="/activities/new" render={props => (
+            <Route exact path="/addactivity" render={props => (
               <div className = "App">
                 <video id="background-video" loop autoPlay>
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
@@ -185,10 +195,7 @@ export default connect(mapComponentToProps)(
                 </video>
                 <NavBar/>
                 <Grid>
-                  {/*
-                    this.props.user.email==="admin@example.com" &&
                     <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
-                  */}
                 </Grid>
               </div>
             )}/>
