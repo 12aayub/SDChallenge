@@ -47,10 +47,6 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(handleUserLogin(this.state.apiUrl, input))
     }
 
-    handleLogout(){
-      this.props.dispatch(handleUserLogout())
-    }
-
     handleComplete(activity){
       this.props.dispatch(completeActivity(this.state.apiUrl, activity))
     }
@@ -67,6 +63,7 @@ export default connect(mapComponentToProps)(
     }
 
     render() {
+        console.log(this.props)
       return (
         <Router>
           <div>
@@ -81,7 +78,7 @@ export default connect(mapComponentToProps)(
                   <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
                 }
                 {
-                  !this.props.user &&
+                  (!this.props.user) &&
                   <NavBar/>
                 }
                 <Grid>
@@ -89,7 +86,7 @@ export default connect(mapComponentToProps)(
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
                   {
-                    !this.props.user &&
+                    (!this.props.user) &&
                     <ActivitiesAndMap
                       activities={this.props.allActivities}
                       user={this.props.user}
@@ -99,7 +96,7 @@ export default connect(mapComponentToProps)(
                   {
                     this.props.user &&
                     <div>
-                        <h2>Hello, {this.props.user.name}!</h2>
+                        <h2>HELLO, {this.props.user.name.toUpperCase()}!</h2>
                         <h3>Here are the challenges you have yet to complete:</h3>
                       <ActivitiesAndMap
                         activities={this.props.unfinishedActivities}
@@ -118,18 +115,25 @@ export default connect(mapComponentToProps)(
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
                   <source src='../Sunset-Siesta.mp4' type="video/ogg" />
                 </video>
-                <NavBarUser/>
+                {
+                  (!this.props.user) &&
+                  <NavBar/>
+                }
+                {
+                  this.props.user &&
+                  <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
+                }
                 <Grid>
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
                   {
                     !this.props.user &&
-                    <Redirect to="/" />
+                    <h1>Please log in to continue.</h1>
                   }
                   {
                     this.props.user &&
-                    <h2>Hello, {this.props.user.name}!</h2>
+                    <h2>HELLO, {this.props.user.name.toUpperCase()}!</h2>
                   }
                   {
                     this.props.user &&
@@ -138,6 +142,7 @@ export default connect(mapComponentToProps)(
                       completedActivities={this.props.completedActivities}
                       onSubmit={this.handleLogout.bind(this)} />
                   }
+
                 </Grid>
               </div>
             )}/>

@@ -172,28 +172,31 @@ app.post('/login', (req, res) => {
         User.find({ where: {email: req.body.email} }).then((user) => {
           // check users password
           if(user.verifyPassword(req.body.password)){
-            CompletedActivity.findAll({
-              where: {
-                userID: user.id,
-                completedAt: {
-                  $ne: null
-                }
-              },
-              include: [{
-                model: Activity
-              }]
-            }).then((results) => {
-              Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
-              .then((unfinished) => {
-                res.status(201)
-                res.json({
-                  completedActivities: results,
-                  unfinishedActivities: unfinished[0],
-                  user: user
+            user.setAuthToken()
+              user.save().then((user) => {
+                CompletedActivity.findAll({
+                  where: {
+                    userID: user.id,
+                    completedAt: {
+                      $ne: null
+                    }
+                  },
+                  include: [{
+                    model: Activity
+                  }]
+              }).then((results) => {
+                Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
+                .then((unfinished) => {
+                  res.status(201)
+                  res.json({
+                    completedActivities: results,
+                    unfinishedActivities: unfinished[0],
+                    user: user
+                  })
+                }).catch((error) => {
+                  res.status(400)
+                  res.json({errors: {message: "Activities not found"}})
                 })
-              }).catch((error) => {
-                res.status(400)
-                res.json({errors: {message: "Activities not found"}})
               })
             })
           } else {
@@ -212,15 +215,20 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-  req.checkBody('email', 'Is required').notEmpty()
+  req.checkBody('authToken', 'Is required').notEmpty()
 
   req.getValidationResult()
     .then((validationErrors) =>{
       if(validationErrors.isEmpty()){
-        // find user by email
-        User.find({ where: {email: req.body.email} }).then((user) => {
+        // find user by authToken
+        User.find({ where: {authToken: req.body.authToken} }).then((user) => {
+          if(user.authExpired()){
+            res.status(400)
+            res.json({errors: {message: "Please log in again"}})
+          } else {
             res.status(201)
             res.json({user: user})
+          }
         }).catch((error) => {
           res.status(400)
           res.json({errors: {message: "User not found"}})

@@ -2,9 +2,7 @@
 .App{
   font-family: 'Josefin Sans', sans-serif;
 }
-.page-header{
 
-}
 #background-video{
     height: 110%;
     width:auto;
@@ -15,6 +13,20 @@
 h1{
   color:white;
   text-shadow: 1px 1px 2px #000000;
+  text-align:center;
+  margin-bottom:35px;
+}
+
+h2{
+  color:white;
+  text-shadow: 1px 1px 10px #000000;
+  text-align:center;
+  margin-bottom:35px;
+}
+
+h3{
+  color:white;
+  text-shadow: 1px 1px 10px #000000;
   text-align:center;
   margin-bottom:35px;
 }
@@ -46,7 +58,14 @@ border-style: ridge;
 #challengesTitle{
   color:white;
   margin-left:10px;
-  text-shadow: 0.25px 0.25px 0.5px #000000;
+}
+
+@media (min-width:961px){
+  #challengesTitle{
+    color:grey;
+    margin-left:10px;
+    /*text-shadow: 0.25px 0.25px 0.5px #000000;*/
+  }
 }
 .activityList{
   width:100%;
@@ -72,9 +91,17 @@ border-style: ridge;
 
 
 /*Modal Styles*/
+@media (min-width:961px){
+  .modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+  }
+}
 .modal-backdrop
 {
-    opacity:0.25 !important;
+    opacity:0.5 !important;
 }
 #locationIcon{
   margin:10px;
@@ -89,10 +116,15 @@ border-style: ridge;
 .modal-footer{
   background-color:#ffeee6;
 }
-/*#modalPoints{
+.modal2{
+  text-align: center;
+}
+
+#modalAddress{
   float:left;
-  font-family: 'Josefin Sans', sans-serif;
-}*/
+  text-align: left;
+  width:50%;
+}
 #closeButton{
   background-color: transparent;
   border: solid 2px black;
@@ -104,4 +136,15 @@ border-style: ridge;
   color:#2cba7f;
   width:140px;
   margin-right:20px;
+}
+
+/*login form css*/
+.input.form-control{
+  width: 100%;
+}
+
+@media (min-width:961px){
+  .loginForm{
+    width:40%;
+  }
 }

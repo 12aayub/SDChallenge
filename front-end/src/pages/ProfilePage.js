@@ -24,7 +24,7 @@ withGoogleMap
   >
     { props.activities.map((activity) =>{
       return (
-      <Marker key={activity.Activity.id} position={{ lat: activity.Activity.latitude, lng: activity.Activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
+      <Marker key={activity.Activity.id} position={{ lat: activity.Activity.latitude, lng: activity.Activity.longitude }} onClick={props.onMarkerClick.bind(this, activity.Activity)} />
     )})}
   </GoogleMap>
 )
@@ -46,7 +46,7 @@ class CompletedActivities extends Component {
   render() {
     return (
       <div>
-        <h3>Here are the challenges you have completed:</h3>
+        <h3>Congrats on completing these challenges!</h3>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}
@@ -64,8 +64,7 @@ class CompletedActivities extends Component {
                     }
                     </p>
                     <p>Description: {index.Activity.description}</p>
-                    <p>Latitude: {index.Activity.latitude}</p>
-                    <p>Longitude: {index.Activity.longitude}</p>
+                    <p>Address: {index.Activity.address}</p>
                   </div>
                 </ListGroupItem>
               )
@@ -91,20 +90,22 @@ class CompletedActivities extends Component {
   modal() {
     if(this.state.currentActivity){
       const theModal = (
-        <Modal show={this.state.showModal}
+        <Modal className = "modal" show={this.state.showModal}
         onHide={this.close.bind(this)}
         >
           <Modal.Header>
-            <Modal.Title>{this.state.currentActivity.name}</Modal.Title>
+            <Modal.Title>
+              <img id = "locationIcon" src = '../locationIcon.png' alt = 'locationIcon'/>
+              {this.state.currentActivity.name.toUpperCase()}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>{this.state.currentActivity.description}</p>
-            <hr/>
-            <h4>Longitude: {this.state.currentActivity.longitude}</h4>
-            <h4>Latitude: {this.state.currentActivity.latitude}</h4>
+            <h5>{this.state.currentActivity.description}</h5>
+
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={this.close.bind(this)}>Close</button>
+            <div id = "modalAddress"><p>{this.state.currentActivity.address} </p></div>
+            <button id = "closeButton" onClick={this.close.bind(this)}>CLOSE</button>
           </Modal.Footer>
         </Modal>
         )
