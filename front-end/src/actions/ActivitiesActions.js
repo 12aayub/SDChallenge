@@ -17,17 +17,7 @@ export function fetchCompletedActivities(apiUrl){
   return ((dispatch)=>{
     var userID = localStorage.getItem('userID');
     if(userID){
-      fetch(`${apiUrl}/completedactivities`,
-        {
-          body: JSON.stringify(
-            {
-              id: userID
-            }
-          ),
-          headers: { 'Content-Type': 'application/json' },
-          method: "POST"
-        }
-      )
+      fetch(`${apiUrl}/completedactivities/${userID}`)
       .then((rawResponse)=>{
         return rawResponse.json()
       }).then((parsedResponse) => {
@@ -40,6 +30,7 @@ export function fetchCompletedActivities(apiUrl){
   })
 }
 
+//display unfinished activities
 export function fetchUnfinishedActivities(apiUrl){
   return ((dispatch)=>{
     var userID = localStorage.getItem('userID');
@@ -77,12 +68,14 @@ export function completeActivity(apiUrl, activityID){
       return rawResponse.json()
     })
     .then((parsedResponse) =>{
-        // let newActivity = []
-        // newActivity.push(parsedResponse)
-        dispatch({
-          type: 'FETCH_COMPLETED_ACTIVITIES',
-          payload: parsedResponse.completedActivities
-        })
+      dispatch({
+        type: 'FETCH_UNFINISHED_ACTIVITIES',
+        payload: parsedResponse.unfinishedActivities
+      })
+      dispatch({
+        type: 'FETCH_COMPLETED_ACTIVITIES',
+        payload: parsedResponse.unfinishedActivities
+      })
     })
   })
 }
@@ -101,8 +94,6 @@ export function createNewActivity(apiUrl, form){
       return rawResponse.json()
     })
     .then((parsedResponse) =>{
-        // let newActivity = []
-        // newActivity.push(parsedResponse)
       dispatch({
         type: 'FETCH_ALL_ACTIVITIES',
         payload: parsedResponse.completedActivities

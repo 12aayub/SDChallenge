@@ -1,3 +1,4 @@
+//sign up
 export function addNewUser(apiUrl, params){
   return((dispatch)=>{
     fetch(`${apiUrl}/signup`,
@@ -23,11 +24,20 @@ export function addNewUser(apiUrl, params){
           type: 'FETCHED_USER',
           payload: parsedResponse.user
         })
+        dispatch({
+          type: 'FETCH_COMPLETED_ACTIVITIES',
+          payload: parsedResponse.completedActivities
+        })
+        dispatch({
+          type: 'FETCH_UNFINISHED_ACTIVITIES',
+          payload: parsedResponse.unfinishedActivities
+        })
       }
     })
   })
 }
 
+//log in
 export function handleUserLogin(apiUrl, params){
   return((dispatch)=>{
     fetch(`${apiUrl}/login`,
@@ -57,6 +67,10 @@ export function handleUserLogin(apiUrl, params){
             type: 'FETCH_COMPLETED_ACTIVITIES',
             payload: parsedResponse.completedActivities
           })
+          dispatch({
+            type: 'FETCH_UNFINISHED_ACTIVITIES',
+            payload: parsedResponse.unfinishedActivities
+          })
         }
     })
   })
@@ -72,6 +86,7 @@ export function handleUserLogout() {
   })
 }
 
+//check if a user is already logged in
 export function checkLogin(apiUrl){
   return ((dispatch)=>{
     var userEmail = localStorage.getItem('userEmail');

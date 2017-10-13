@@ -5,29 +5,8 @@ module.exports = {
     return queryInterface.bulkInsert('CompletedActivities',
       [
         {
-          userID: 4,
+          userID: 1,
           activityID: 1,
-          completedAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          userID: 4,
-          activityID: 2,
-          completedAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          userID: 2,
-          activityID: 1,
-          completedAt: new Date(),
-          createdAt: new Date(),
-          updatedAt: new Date()
-        },
-        {
-          userID: 4,
-          activityID: 4,
           completedAt: new Date(),
           createdAt: new Date(),
           updatedAt: new Date()
