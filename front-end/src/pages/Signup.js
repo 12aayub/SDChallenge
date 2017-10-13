@@ -30,24 +30,25 @@ class Signup extends Component {
     this.setState({form: formState})
   }
 
-  handleSubmit(){
+  handleSubmit(event){
+    event.preventDefault(event)
     this.props.onSubmit(this.state.form)
   }
 
   render(){
     return (
-      <Grid>
+      <Grid className = "loginForm">
           <PageHeader>
             <Row>
-              <Col xs={8}>
+              <Col xs={12}>
                 Sign Up
               </Col>
             </Row>
           </PageHeader>
 
-          <form>
+          <form >
               <Row>
-                <Col xs={6}>
+                <Col xs={12}>
                   <FormGroup>
                     <ControlLabel id="name">Name</ControlLabel>
                     <FormControl
@@ -61,7 +62,7 @@ class Signup extends Component {
               </Row>
 
               <Row>
-                <Col xs={6}>
+                <Col xs={12}>
                   <FormGroup>
                     <ControlLabel id="email">Email</ControlLabel>
                     <FormControl
@@ -73,7 +74,7 @@ class Signup extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col xs={6}>
+                <Col xs={12}>
                   <FormGroup>
                     <ControlLabel id="password">Password</ControlLabel>
                     <FormControl
@@ -89,7 +90,7 @@ class Signup extends Component {
                 <Col xs={6}>
                   <Button
                     onClick={this.handleSubmit.bind(this)}
-                  id="submit">Sign Up</Button>
+                  id="submit" type="submit">Sign Up</Button>
                 </Col>
               </Row>
 
