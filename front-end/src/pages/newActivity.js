@@ -9,7 +9,6 @@ import {
   // Alert,
   // HelpBlock
 } from 'react-bootstrap'
-import { createNewActivity } from '../actions/ActivitiesActions'
 
 class NewActivity extends Component {
   constructor(props){
@@ -18,6 +17,7 @@ class NewActivity extends Component {
       form:{
         name: '',
         description:'',
+        address: '',
         latitude:'',
         longitude:''
       }
@@ -56,6 +56,17 @@ class NewActivity extends Component {
               <FormControl type="text" name="description"
               onChange={this.handleChange.bind(this)}
               value={this.state.form.description}/>
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={6}>
+            <FormGroup>
+              <ControlLabel>Address</ControlLabel>
+              <FormControl type="text" name="address"
+              onChange={this.handleChange.bind(this)}
+              value={this.state.form.address}/>
             </FormGroup>
           </Col>
         </Row>

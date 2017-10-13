@@ -193,9 +193,17 @@ export default connect(mapComponentToProps)(
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
                   <source src='../Sunset-Siesta.mp4' type="video/ogg" />
                 </video>
-                <NavBar/>
+                <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
                 <Grid>
                     <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
+                    {
+                      this.props.user && (this.props.user.name!=="Admin") &&
+                      <Redirect to="/" />
+                    }
+                    {
+                      !this.props.user &&
+                      <Redirect to="/" />
+                    }
                 </Grid>
               </div>
             )}/>
