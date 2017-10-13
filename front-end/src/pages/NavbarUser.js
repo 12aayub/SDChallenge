@@ -24,12 +24,12 @@ class NavBarUser extends Component {
            </Navbar.Header>
            <Navbar.Collapse>
              <Nav>
-               <NavItem eventKey={1} href="/">Challenges</NavItem>
-               <NavItem eventKey={2} href="/profile">My Profile</NavItem>
+               <MenuItem eventKey={1} href="/">Challenges</MenuItem>
+               <MenuItem eventKey={2} href="/profile">My Profile</MenuItem>
              </Nav>
              <Nav pullRight>
                <NavItem eventKey={2} onClick={this.handleLogout.bind(this)}
-        id="submit">
+               id="submit">
                   <span className="glyphicon glyphicon-log-out"></span>
                   Sign Out
                 </NavItem>

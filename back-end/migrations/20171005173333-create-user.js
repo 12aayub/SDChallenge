@@ -20,6 +20,12 @@ module.exports = {
       salt: {
         type: Sequelize.STRING
       },
+      authToken: {
+        type: Sequelize.STRING
+      },
+      authTokenExpiration: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

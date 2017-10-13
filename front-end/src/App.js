@@ -123,10 +123,7 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  {
-                    !this.props.user &&
-                    <Redirect to="/" />
-                  }
+                  {/* !this.props.user && <Redirect to="/" /> */}
                   {
                     this.props.user &&
                     <h2>Hello, {this.props.user.name}!</h2>
