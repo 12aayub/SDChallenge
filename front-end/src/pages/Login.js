@@ -75,7 +75,6 @@ class Login extends Component {
                   id="submit">Log In</Button>
                 </Col>
               </Row>
-
           </form>
       </Grid>
 

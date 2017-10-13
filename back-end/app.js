@@ -103,10 +103,6 @@ app.post('/activities/new', (req, res) => {
         .then((activities) => {
             res.json({activities:activities})
             })
-        // }).then((activity)=>{
-        //   res.status(201)
-        //   res.json({activity: activity})
-        // })
       }else{
         res.status(400)
         res.json({errors: {validations: validationErrors.array()}})

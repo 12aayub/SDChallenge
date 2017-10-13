@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
-import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+<<<<<<< HEAD
 const MapStyles = require("./MapStyles.json")
+=======
+import { handleUserLogout } from '../actions/UserActions'
+
+
+>>>>>>> 9de7e9c79e4d03e042a015826246f8398095d604
 
 const MapComponent = compose(
 withProps({
@@ -28,6 +34,9 @@ withGoogleMap
 )
 
 class CompletedActivities extends Component {
+  handleLogout(){
+    this.props.onSubmit(handleUserLogout)
+      }
 
   constructor(props){
     super(props);

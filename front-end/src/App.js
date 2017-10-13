@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, PageHeader } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
 
 import ActivitiesAndMap from './pages/ActivitiesAndMap'
 import NewActivity from './pages/newActivity'
@@ -53,6 +53,10 @@ export default connect(mapComponentToProps)(
 
     handleComplete(activity){
       this.props.dispatch(completeActivity(this.state.apiUrl, activity))
+    }
+
+    handleLogout(){
+      this.props.dispatch(handleUserLogout())
     }
 
     componentWillMount(){
@@ -109,6 +113,7 @@ export default connect(mapComponentToProps)(
             )}/>
 
             <Route exact path="/profile" render={props => (
+<<<<<<< HEAD
               <div className = "App">
                 <video id="background-video" loop autoPlay>
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
@@ -120,16 +125,20 @@ export default connect(mapComponentToProps)(
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
                   {
-                    this.props.user &&
-                    <div>
-                      <h2>Hello, {this.props.user.name}!</h2>
-                      <ProfilePage
-                        user={this.props.user}
-                        completedActivities={this.props.completedActivities}
-                      />
-                    </div>
+                    !this.props.user &&
+                    <Redirect to="/" />
                   }
-
+                  {
+                    this.props.user &&
+                    <h2>Hello, {this.props.user.name}!</h2>
+                  }
+                  {
+                    this.props.user &&
+                    <ProfilePage
+                      user={this.props.user}
+                      completedActivities={this.props.completedActivities}
+                      onSubmit={this.handleLogout.bind(this)} />
+                  }
                 </Grid>
               </div>
             )}/>
