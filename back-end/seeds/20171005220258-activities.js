@@ -53,8 +53,8 @@ module.exports = {
           name: 'Hotel del Coronado (Coronado)',
           description: 'A historic beachfront hotel in the city of Coronado. It is the second largest wooden structure in the United States (after the Tillamook Air Museum in Tillamook, Oregon) and was designated a National Historic Landmark in 1977 and a California Historical Landmark in 1970. When it opened in 1888, it was the largest resort hotel in the world.',
           address: '1500 Orange Ave, Coronado, CA 92118',
-          latitude: 32.7107368,
-          longitude: -117.1558866,
+          latitude: 32.6815235,
+          longitude: -117.1778507,
           createdAt: new Date(),
           updatedAt: new Date()
         },

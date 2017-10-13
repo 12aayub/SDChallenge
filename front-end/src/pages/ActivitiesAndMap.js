@@ -35,6 +35,7 @@ class ActivitiesAndMap extends Component {
     super(props);
     this.state = {
       showModal:false,
+      showModal2:false,
       isMarkerShown: true,
       currentActivity: null
     }
@@ -56,10 +57,11 @@ class ActivitiesAndMap extends Component {
                 <button className = "activityTitle" onClick={this.open.bind(this, activity)}>
                   {activity.name}
                 </button>
-                {this.modal()}
               </ListGroupItem>
               )
             })}
+            {this.modal2()}
+            {this.modal()}
           </ListGroup>
         </div>
       </div>
@@ -70,10 +72,20 @@ class ActivitiesAndMap extends Component {
     this.setState({ showModal: false });
   }
 
+  close2() {
+    this.setState({ showModal2: false });
+  }
+
   open(activity) {
     this.setState({
       showModal: true,
       currentActivity: activity
+    });
+  }
+
+  open2() {
+    this.setState({
+      showModal2: true
     });
   }
 
@@ -93,11 +105,19 @@ class ActivitiesAndMap extends Component {
       if( d < 100 ){
         self.props.handleComplete(activity.id)
         self.setState({ showModal: false })
-        alert("Congrats on completing an activity! Keep it up!")
+        self.setState({ showModal2: true })
+        document.getElementById("headerstyle").style.backgroundColor = '#8fdf8d'
+        setTimeout(function(){self.setState({ showModal2: false }) }, 3000);
+        // alert("Congrats on completing an activity! Keep it up!")
         document.getElementById("completeButton").innerText = "Complete"
       } else {
         self.setState({ showModal: false })
-        alert("You are outside of the activity's location. Get closer!")
+        self.setState({ showModal2: true })
+        document.getElementById("headerstyle").style.backgroundColor = '#ff6666'
+        document.getElementById("greeting").innerText = "Get closer!"
+        document.getElementById("message").innerText = "You are outside of the activity's location."
+        setTimeout(function(){self.setState({ showModal2: false }) }, 3000);
+        // alert("You are outside of the activity's location. Get closer!")
         document.getElementById("completeButton").innerText = "Complete"
       }
     })
@@ -121,7 +141,12 @@ class ActivitiesAndMap extends Component {
           </Modal.Body>
           <Modal.Footer>
             <div id = "modalAddress"><p>{this.state.currentActivity.address} </p></div>
-            <button id = "completeButton" onClick={this.complete.bind(this, this.state.currentActivity)}>COMPLETE<span className="glyphicon glyphicon-check"></span></button>
+            { this.props.user &&
+              <button id = "completeButton" onClick={this.complete.bind(this, this.state.currentActivity)}>COMPLETE <span className="glyphicon glyphicon-check"></span></button>
+            }
+            { (!this.props.user) &&
+              <a href="/signup"><button id = "completeButton">SIGN UP</button></a>
+            }
             <button id = "closeButton" onClick={this.close.bind(this)}>CLOSE</button>
           </Modal.Footer>
         </Modal>
@@ -130,6 +155,24 @@ class ActivitiesAndMap extends Component {
     } else {
       return <div></div>
     }
+  }
+
+  modal2() {
+    const theModal2 = (
+      <Modal className = "modal2" show={this.state.showModal2}
+      onHide={this.close2.bind(this)}
+      >
+        <Modal.Header id="headerstyle">
+          <Modal.Title id="greeting">
+            CONGRATS!
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body >
+           <h5 id="message">You completed a challenge! Keep it up!</h5>
+        </Modal.Body>
+      </Modal>
+    )
+    return theModal2
   }
 };
 

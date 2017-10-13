@@ -19,6 +19,7 @@ import {
   completeActivity,
   fetchUnfinishedActivities,
   createNewActivity
+  //deleteActivity
 } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
@@ -39,6 +40,10 @@ export default connect(mapComponentToProps)(
         apiUrl: "http://localhost:3000"
       }
     }
+
+    // handleDelete(activity){
+    //    this.props.dispatch(deleteActivity(this.state.apiUrl, activity))
+    // }
 
     handleNewActivity(input){
       this.props.dispatch(createNewActivity(this.state.apiUrl, input))
@@ -104,6 +109,7 @@ export default connect(mapComponentToProps)(
                       activities={this.props.allActivities}
                       user={this.props.user}
                       handleComplete={this.handleComplete.bind(this)}
+                      //handleDelete={this.handleDelete.bind(this)}
                     />
                   }
                   {
@@ -115,6 +121,7 @@ export default connect(mapComponentToProps)(
                         activities={this.props.unfinishedActivities}
                         user={this.props.user}
                         handleComplete={this.handleComplete.bind(this)}
+                        //handleDelete={this.handleDelete.bind(this)}
                       />
                     </div>
                   }
@@ -133,7 +140,6 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  {/* !this.props.user && <Redirect to="/" /> */}
                   {
                     this.props.user &&
                     <h2>Hello, {this.props.user.name}!</h2>
