@@ -113,7 +113,6 @@ export default connect(mapComponentToProps)(
             )}/>
 
             <Route exact path="/profile" render={props => (
-<<<<<<< HEAD
               <div className = "App">
                 <video id="background-video" loop autoPlay>
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
