@@ -9,6 +9,10 @@ import {
 
 class NavBarUser extends Component {
 
+  handleLogout(){
+    this.props.onSubmit()
+  }
+
   render() {
     return (
         <Navbar collapseOnSelect>
@@ -24,7 +28,8 @@ class NavBarUser extends Component {
                <NavItem eventKey={2} href="/profile">My Profile</NavItem>
              </Nav>
              <Nav pullRight>
-               <NavItem eventKey={2} href="#">
+               <NavItem eventKey={2} onClick={this.handleLogout.bind(this)}
+        id="submit">
                   <span className="glyphicon glyphicon-log-out"></span>
                   Sign Out
                 </NavItem>

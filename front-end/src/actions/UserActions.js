@@ -76,6 +76,16 @@ export function handleUserLogin(apiUrl, params){
   })
 }
 
+export function handleUserLogout() {
+  return ((dispatch) => {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userID');
+    dispatch({
+      type: 'REMOVE_USER'
+    })
+  })
+}
+
 //check if a user is already logged in
 export function checkLogin(apiUrl){
   return ((dispatch)=>{

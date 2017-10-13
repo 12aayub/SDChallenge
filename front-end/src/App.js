@@ -12,7 +12,7 @@ import NavBarUser from './pages/NavbarUser'
 import NavBar from './pages/Navbar'
 import styles from './App.css'
 
-import { addNewUser, checkLogin, handleUserLogin } from './actions/UserActions'
+import { addNewUser, checkLogin, handleUserLogin, handleUserLogout } from './actions/UserActions'
 import {
   fetchAllActivities,
   fetchCompletedActivities,
@@ -47,6 +47,10 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(handleUserLogin(this.state.apiUrl, input))
     }
 
+    handleLogout(){
+      this.props.dispatch(handleUserLogout())
+    }
+
     handleComplete(activity){
       this.props.dispatch(completeActivity(this.state.apiUrl, activity))
     }
@@ -70,7 +74,7 @@ export default connect(mapComponentToProps)(
                 </video>
                 {
                   this.props.user &&
-                  <NavBarUser/>
+                  <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
                 }
                 {
                   !this.props.user &&
@@ -125,7 +129,7 @@ export default connect(mapComponentToProps)(
                       />
                     </div>
                   }
-                  
+
                 </Grid>
               </div>
             )}/>

@@ -16,7 +16,7 @@ withScriptjs,
 withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={11}
+    defaultZoom={10}
     defaultCenter={props.center}
     defaultOptions={{ styles:MapStyles }}
   >
@@ -116,9 +116,9 @@ class ActivitiesAndMap extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>{this.state.currentActivity.longitude}</h4>
-            <h4>{this.state.currentActivity.latitude}</h4>
-            <p>{this.state.currentActivity.description}</p>
+            <h4>{this.state.currentActivity.description}</h4>
+            <p>{this.state.currentActivity.address}</p>
+
           </Modal.Body>
           <Modal.Footer>
             {/*<h4 id = "modalPoints">POINTS: {this.state.currentActivity.points} </h4>*/}
