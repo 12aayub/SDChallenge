@@ -1,14 +1,14 @@
 const initialState = {
-  allActivities: []
+  unfinishedActivities: []
 }
 export default (currentState = initialState, action) =>{
   let newState
   switch(action.type){
-    case("FETCH_ALL_ACTIVITIES"):{
+    case("FETCH_UNFINISHED_ACTIVITIES"):{
       newState = Object.assign(
         {},
         currentState,
-        {allActivities: action.payload}
+        {unfinishedActivities: action.payload}
       )
       break
     }

@@ -6,6 +6,8 @@ export default (currentState=initialState, action) =>{
   let newState
   switch(action.type){
     case("FETCHED_USER"):{
+      localStorage.setItem('userEmail', action.payload.email);
+      localStorage.setItem('userID', action.payload.id)
       newState = Object.assign(
         {},
         currentState,
@@ -18,6 +20,14 @@ export default (currentState=initialState, action) =>{
         {},
         currentState,
         {currentUser: null, error: action.payload}
+      )
+      break
+    }
+    case("REMOVE_USER"):{
+      newState = Object.assign(
+        {},
+        currentState,
+        {currentUser: null}
       )
       break
     }

@@ -9,7 +9,7 @@ import {
   // Alert,
   // HelpBlock
 } from 'react-bootstrap'
-import { createNewActivity } from '../actions/newActivityAction'
+import { createNewActivity } from '../actions/ActivitiesActions'
 
 class NewActivity extends Component {
   constructor(props){
@@ -82,13 +82,13 @@ class NewActivity extends Component {
           </Col>
         </Row>
 
-        <Row>
-          <Col xs= {6}>
-            <Button id="submit"
-            onClick={this.handleSubmit.bind(this)}> Create New Activity</Button>
-          </Col>
-        </Row>
-      </form>
+				<Row>
+					<Col xs= {6}>
+						<Button id="submit"
+						onClick={this.handleSubmit.bind(this)}> Create New Activity</Button>
+					</Col>
+				</Row>
+			</form>
 
     )
   }

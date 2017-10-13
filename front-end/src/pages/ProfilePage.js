@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { handleUserLogout } from '../actions/UserActions'
+
+
 
 const MapComponent = compose(
   withProps({
@@ -18,16 +21,17 @@ const MapComponent = compose(
     defaultZoom={12}
     defaultCenter={props.center}
   >
-    { props.activities.map((activity) =>{
+    { props.activities.map((index) =>{
     return (
-      <Marker key={activity.id} position={{ lat: activity.latitude, lng: activity.longitude }} onClick={props.onMarkerClick.bind(this, activity)} />
+      <Marker key={index.Activity.id} position={{ lat: index.Activity.latitude, lng: index.Activity.longitude }} onClick={props.onMarkerClick.bind(this, index.Activity)} />
     )})}
   </GoogleMap>
 )
 
-
-
-class ActivitiesAndMap extends Component {
+class CompletedActivities extends Component {
+  handleLogout(){
+    this.props.onSubmit(handleUserLogout)
+      }
 
   constructor(props){
     super(props);
@@ -41,24 +45,36 @@ class ActivitiesAndMap extends Component {
   render() {
     return (
       <div>
+        <h3>Here are the challenges you have completed:</h3>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
-        activities={this.props.activities}
+        activities={this.props.completedActivities}
         />
+        <Button
+          onClick={this.handleLogout.bind(this)}
+        id="submit">Log Out</Button>
         <ListGroup>
-          {this.props.activities.map((activity) =>{
-            return (
-              <ListGroupItem key = {activity.id}>
-                <button className = "activity" onClick={this.open.bind(this, activity)}>
-                  {activity.name}
-                </button>
-                {this.modal()}
+
+        {this.props.completedActivities.map((index) =>{
+          return (
+              <ListGroupItem key = {index.Activity.id}>
+                <div>
+                  <p>Activity: {index.Activity.name}</p>
+                  <p>Completed At: {
+                    new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
+                  }
+                  </p>
+                  <p>Description: {index.Activity.description}</p>
+                  <p>Latitude: {index.Activity.latitude}</p>
+                  <p>Longitude: {index.Activity.longitude}</p>
+                </div>
               </ListGroupItem>
             )
-          })}
+        })}
+        {this.modal()}
         </ListGroup>
       </div>
-    );
+    )
   }
 
   close() {
@@ -70,11 +86,6 @@ class ActivitiesAndMap extends Component {
       showModal: true,
       currentActivity: activity
     });
-  }
-
-  complete(activity) {
-    this.setState({ showModal: false })
-    this.props.handleComplete(activity.id)
   }
 
   modal() {
@@ -94,7 +105,6 @@ class ActivitiesAndMap extends Component {
           </Modal.Body>
           <Modal.Footer>
             <button onClick={this.close.bind(this)}>Close</button>
-            <button onClick={this.complete.bind(this, this.state.currentActivity)}>Complete</button>
           </Modal.Footer>
         </Modal>
         )
@@ -104,17 +114,6 @@ class ActivitiesAndMap extends Component {
     }
   }
 
-// findIncomplete (array1, array2) {
-//     var incomplete = [];
-//     for(var i in array1) {
-//       if(array2.indexOf( array1[i].id ) > -1){
-//         incomplete.push( array1[i] )
-//         console.log(array1[i])
-//       }
-//     }
-//     return incomplete;
-//   };
+}
 
-};
-
-export default ActivitiesAndMap;
+export default CompletedActivities;

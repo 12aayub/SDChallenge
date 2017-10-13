@@ -5429,8 +5429,13 @@ react-error-overlay@^2.0.2:
     source-map "0.5.6"
 
 react-google-maps@^8.3.4:
-  version "8.4.1"
-  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.4.1.tgz#66e5eab042591872ef7d37a4ec77407ba8ee21ec"
+<<<<<<< HEAD
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.4.0.tgz#3b6cef0fd355c5b82fe08da2b9e07a657e901a59"
+=======
+  version "8.3.5"
+  resolved "https://registry.yarnpkg.com/react-google-maps/-/react-google-maps-8.3.5.tgz#52a8fa9de0815a74027c6a0bc1a42a517c5e5a7c"
+>>>>>>> 5bfcef729f52d2392c90356677fc648b3fdcc9b6
   dependencies:
     babel-runtime "^6.11.6"
     can-use-dom "^0.1.0"

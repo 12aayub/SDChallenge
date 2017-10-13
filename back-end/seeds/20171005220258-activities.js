@@ -27,6 +27,14 @@ module.exports = {
           longitude: -117.168310,
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        {
+          name: 'CVS',
+          description: 'Buy some Depends from CVS',
+          latitude: 32.7107368,
+          longitude: -117.1558866,
+          createdAt: new Date(),
+          updatedAt: new Date()
         }
       ]
     )
