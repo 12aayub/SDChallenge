@@ -103,7 +103,7 @@ class ActivitiesAndMap extends Component {
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
       var d = R * c
       if( d < 100 ){
-        self.props.handleComplete(activity.id)
+        self.props.handleComplete(activity)
         self.setState({ showModal: false })
         self.setState({ showModal2: true })
         document.getElementById("headerstyle").style.backgroundColor = '#8fdf8d'
@@ -136,6 +136,7 @@ class ActivitiesAndMap extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <h4>POINTS: {this.state.currentActivity.points}</h4>
             <h5>{this.state.currentActivity.description}</h5>
 
           </Modal.Body>

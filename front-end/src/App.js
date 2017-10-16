@@ -17,7 +17,8 @@ import {
   fetchAllActivities,
   fetchCompletedActivities,
   completeActivity,
-  fetchUnfinishedActivities
+  fetchUnfinishedActivities,
+  fetchUserPoints
 } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
@@ -26,7 +27,8 @@ const mapComponentToProps = (store) =>{
     userError: store.user.error,
     allActivities: store.allActivities.allActivities,
     completedActivities: store.completedActivities.completedActivities,
-    unfinishedActivities: store.unfinishedActivities.unfinishedActivities
+    unfinishedActivities: store.unfinishedActivities.unfinishedActivities,
+    userPoints: store.userPoints.userPoints
   }
 }
 
@@ -39,6 +41,8 @@ export default connect(mapComponentToProps)(
       }
     }
 
+
+
     handleNewUser(input){
       this.props.dispatch(addNewUser(this.state.apiUrl, input))
     }
@@ -48,7 +52,7 @@ export default connect(mapComponentToProps)(
     }
 
     handleComplete(activity){
-      this.props.dispatch(completeActivity(this.state.apiUrl, activity))
+      this.props.dispatch(completeActivity(this.state.apiUrl, activity.id, activity.points))
     }
 
     handleLogout(){
@@ -60,6 +64,7 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
+      this.props.dispatch(fetchUserPoints(this.state.apiUrl))
     }
 
     render() {
@@ -128,10 +133,6 @@ export default connect(mapComponentToProps)(
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
                   {
-                    !this.props.user &&
-                    <h1>Please log in to continue.</h1>
-                  }
-                  {
                     this.props.user &&
                     <h2>HELLO, {this.props.user.name.toUpperCase()}!</h2>
                   }
@@ -140,9 +141,13 @@ export default connect(mapComponentToProps)(
                     <ProfilePage
                       user={this.props.user}
                       completedActivities={this.props.completedActivities}
-                      onSubmit={this.handleLogout.bind(this)} />
+                      onSubmit={this.handleLogout.bind(this)}
+                      userPoints={this.props.userPoints} />
                   }
-
+                  {
+                    !this.props.user &&
+                    <h1>Please log in to continue.</h1>
+                  }
                 </Grid>
               </div>
             )}/>

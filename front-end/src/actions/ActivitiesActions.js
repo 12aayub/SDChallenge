@@ -49,7 +49,7 @@ export function fetchUnfinishedActivities(apiUrl){
 }
 
 //action to complete an activity
-export function completeActivity(apiUrl, activityID){
+export function completeActivity(apiUrl, activityID, activityPT){
   return ((dispatch)=>{
     var userID = localStorage.getItem('userID');
     fetch(`${apiUrl}/completedActivity/new`,
@@ -57,7 +57,8 @@ export function completeActivity(apiUrl, activityID){
         body: JSON.stringify(
           {
             id: userID,
-            actID: activityID
+            actID: activityID,
+            points: activityPT
           }
         ),
         headers: { 'Content-Type': 'application/json' },
@@ -75,6 +76,10 @@ export function completeActivity(apiUrl, activityID){
       dispatch({
         type: 'FETCH_COMPLETED_ACTIVITIES',
         payload: parsedResponse.unfinishedActivities
+      })
+      dispatch({
+        type: 'FETCH_USER_POINTS',
+        payload: parsedResponse.userPoints
       })
     })
   })
@@ -100,4 +105,35 @@ export function createNewActivity(apiUrl, form){
       })
     })
 })
+}
+
+//fetch user points from completed activities
+export function fetchUserPoints(apiUrl){
+  return ((dispatch)=>{
+    var userID = localStorage.getItem('userID');
+    fetch(`${apiUrl}/user/points`,
+      {
+        body: JSON.stringify(
+          {
+            id: userID
+          }
+        ),
+        headers: { 'Content-Type': 'application/json' },
+        method: "POST"
+      }
+    )
+    .then((rawResponse)=>{
+      return rawResponse.json()
+    })
+    .then((parsedResponse) =>{
+      dispatch({
+        type: 'FETCH_USER_POINTS',
+        payload: parsedResponse.userPoints
+      })
+      dispatch({
+        type: 'FETCH_COMPLETED_ACTIVITIES',
+        payload: parsedResponse.completedActivities
+      })
+    })
+  })
 }

@@ -30,6 +30,7 @@ withGoogleMap
 )
 
 class CompletedActivities extends Component {
+
   handleLogout(){
     this.props.onSubmit(handleUserLogout)
       }
@@ -47,6 +48,7 @@ class CompletedActivities extends Component {
     return (
       <div>
         <h3>Congrats on completing these challenges!</h3>
+        <h2>Your total points: {this.props.userPoints}</h2>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}
@@ -59,12 +61,13 @@ class CompletedActivities extends Component {
                 <ListGroupItem key = {index.Activity.id} className = "activity">
                   <div>
                     <p>Activity: {index.Activity.name}</p>
+                    <p>Description: {index.Activity.description}</p>
+                    <p>Address: {index.Activity.address}</p>
+                    <p>Points: {index.Activity.points}</p>
                     <p>Completed At: {
                       new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
                     }
                     </p>
-                    <p>Description: {index.Activity.description}</p>
-                    <p>Address: {index.Activity.address}</p>
                   </div>
                 </ListGroupItem>
               )
@@ -100,6 +103,7 @@ class CompletedActivities extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <h5>POINTS: {this.state.currentActivity.points}</h5>
             <h5>{this.state.currentActivity.description}</h5>
 
           </Modal.Body>
