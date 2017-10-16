@@ -75,11 +75,15 @@ export function completeActivity(apiUrl, activityID, activityPT){
       })
       dispatch({
         type: 'FETCH_COMPLETED_ACTIVITIES',
-        payload: parsedResponse.unfinishedActivities
+        payload: parsedResponse.completedActivities
       })
       dispatch({
         type: 'FETCH_USER_POINTS',
         payload: parsedResponse.userPoints
+      })
+      dispatch({
+        type: 'FETCH_LEADERBOARD',
+        payload: parsedResponse.leaderboard
       })
     })
   })
@@ -133,6 +137,21 @@ export function fetchUserPoints(apiUrl){
       dispatch({
         type: 'FETCH_COMPLETED_ACTIVITIES',
         payload: parsedResponse.completedActivities
+      })
+    })
+  })
+}
+
+export function fetchLeaderboard(apiUrl){
+  return ((dispatch)=>{
+    fetch(`${apiUrl}/leaderboard`)
+    .then((rawResponse)=>{
+      return rawResponse.json()
+    })
+    .then((parsedResponse) =>{
+      dispatch({
+        type: 'FETCH_LEADERBOARD',
+        payload: parsedResponse.leaderboard
       })
     })
   })

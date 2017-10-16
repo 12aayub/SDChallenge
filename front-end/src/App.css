@@ -30,6 +30,13 @@ h3{
   text-align:center;
   margin-bottom:35px;
 }
+
+/*About text*/
+#about{
+  color: #585e63;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 /*NavBar styles*/
 .navbar-default{
   background-image:none;
@@ -147,4 +154,11 @@ border-style: ridge;
   .loginForm{
     width:40%;
   }
+}
+
+/*leaderboard*/
+.leaderboard {
+  margin-top: 5%;
+  margin-left: 42%;
+  width:20%
 }

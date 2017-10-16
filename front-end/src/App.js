@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import ProfilePage from './pages/ProfilePage'
 import NavBarUser from './pages/NavbarUser'
 import NavBar from './pages/Navbar'
+import Leaderboard from './pages/Leaderboard'
 import styles from './App.css'
 
 import { addNewUser, checkLogin, handleUserLogin, handleUserLogout } from './actions/UserActions'
@@ -18,7 +19,8 @@ import {
   fetchCompletedActivities,
   completeActivity,
   fetchUnfinishedActivities,
-  fetchUserPoints
+  fetchUserPoints,
+  fetchLeaderboard
 } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
@@ -28,7 +30,9 @@ const mapComponentToProps = (store) =>{
     allActivities: store.allActivities.allActivities,
     completedActivities: store.completedActivities.completedActivities,
     unfinishedActivities: store.unfinishedActivities.unfinishedActivities,
-    userPoints: store.userPoints.userPoints
+    userPoints: store.userPoints.userPoints,
+    leaderboard: store.leaderboard.leaderboard,
+    loading: store.user.loading
   }
 }
 
@@ -65,10 +69,10 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUserPoints(this.state.apiUrl))
+      this.props.dispatch(fetchLeaderboard(this.state.apiUrl))
     }
 
     render() {
-        console.log(this.props)
       return (
         <Router>
           <div>
@@ -90,13 +94,20 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
+
                   {
                     (!this.props.user) &&
-                    <ActivitiesAndMap
-                      activities={this.props.allActivities}
-                      user={this.props.user}
-                      handleComplete={this.handleComplete.bind(this)}
-                    />
+                    <div>
+                      <h4 id="about">Welcome to the San Diego Challenge! If you’re new or old to San Diego, we think you’ll find these challenges to be a fun and informative way to explore America’s Finest City. We’ve put together a fantastic list that will bring you and your friends and family right in the middle of what makes San Diego amazing.
+                      To get started, just click around the Activities List until you find the one you want to do. Each activity awards points upon completion, Once you get to the location and complete the activity, click the Complete button. Note: You’ll have to be at the location with your GPS on in order to complete the activity! Once activities are completed, your points will be added up with previous completed activities. Your total score will be displayed on your user profile as well as the Leaderboard.
+                      OK that’s it! Have fun exploring!</h4>
+                      <ActivitiesAndMap
+                        activities={this.props.allActivities}
+                        user={this.props.user}
+                        handleComplete={this.handleComplete.bind(this)}
+                      />
+                      <Leaderboard leaderboard={this.props.leaderboard}/>
+                    </div>
                   }
                   {
                     this.props.user &&
@@ -108,7 +119,12 @@ export default connect(mapComponentToProps)(
                         user={this.props.user}
                         handleComplete={this.handleComplete.bind(this)}
                       />
+                      <Leaderboard leaderboard={this.props.leaderboard}/>
                     </div>
+                  }
+                  {
+                    (this.props.user==null) && (this.props.loading) &&
+                    <div></div>
                   }
                 </Grid>
               </div>
@@ -138,15 +154,23 @@ export default connect(mapComponentToProps)(
                   }
                   {
                     this.props.user &&
-                    <ProfilePage
-                      user={this.props.user}
-                      completedActivities={this.props.completedActivities}
-                      onSubmit={this.handleLogout.bind(this)}
-                      userPoints={this.props.userPoints} />
+                    <div>
+                      <ProfilePage
+                        user={this.props.user}
+                        completedActivities={this.props.completedActivities}
+                        onSubmit={this.handleLogout.bind(this)}
+                        userPoints={this.props.userPoints}
+                        leaderPoints={this.props.leaderPoints} />
+                      <Leaderboard leaderboard={this.props.leaderboard}/>
+                    </div>
                   }
                   {
-                    !this.props.user &&
-                    <h1>Please log in to continue.</h1>
+                    (this.props.user==null) && (this.props.loading) &&
+                    <div></div>
+                  }
+                  {
+                    (this.props.user==null) && (!this.props.loading) &&
+                    <Redirect to="/" />
                   }
                 </Grid>
               </div>
