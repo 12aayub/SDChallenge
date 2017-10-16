@@ -8,6 +8,8 @@ import {
   Row,
   Grid,
   PageHeader,
+  Alert,
+  HelpBlock
 } from 'react-bootstrap'
 
 class Login extends Component {
@@ -30,6 +32,17 @@ class Login extends Component {
   handleSubmit(event){
     event.preventDefault(event)
     this.props.onSubmit(this.state.form)
+  }
+
+  errorsFor(attribute){
+    var errorString = ""
+    if(this.props.errors){
+      const errors = this.props.errors.filter(error => error.param === attribute )
+      if(errors){
+        errorString = errors.map(error => error.msg ).join(", ")
+      }
+    }
+    return errorString === "" ? null : errorString
   }
 
   render(){

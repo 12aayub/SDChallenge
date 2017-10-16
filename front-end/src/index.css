@@ -13,3 +13,12 @@ body {
         height: 500px;
     }
 }
+
+.login_error {
+  margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 200px;
+  text-align: center;
+  white-space: nowrap;
+}

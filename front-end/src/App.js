@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, PageHeader } from 'react-bootstrap'
+import { Grid, PageHeader, Alert, HelpBlock } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
 
@@ -71,7 +71,6 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
-      console.log(this.props)
     }
 
     render() {
@@ -133,10 +132,10 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  {/*
+                  {
                     !this.props.user &&
                     <Redirect to="/" />
-                  */}
+                  }
                   {
                     this.props.user &&
                     <h2>Hello, {this.props.user.name}!</h2>
@@ -184,9 +183,15 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  <Login onSubmit={this.handleLogin.bind(this)} />
+                  <Login
+                  onSubmit={this.handleLogin.bind(this)}  />
                     {this.props.user &&
                       <Redirect to="/" />
+                    }
+                    {this.props.userError &&
+                      <Alert className="login_error" bsStyle="danger">
+                      User not found, try again!
+                      </Alert>
                     }
                 </Grid>
               </div>
@@ -205,10 +210,10 @@ export default connect(mapComponentToProps)(
                       this.props.user && (this.props.user.email!=="admin@example.com") &&
                       <Redirect to="/" />
                     }
-                    {/*
+                    {
                       !this.props.user &&
                       <Redirect to="/" />
-                    */}
+                    }
                 </Grid>
               </div>
             )}/>
