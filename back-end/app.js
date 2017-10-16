@@ -44,7 +44,7 @@ app.get('/completedactivities/:id', (req, res) => {
 })
 
 app.get('/unfinishedactivities/:id', (req, res) => {
-  Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.params.id}})
+  Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude", "Activities"."points" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.params.id}})
   .then((results) => {
     res.status(201)
     res.json({unfinishedActivities: results[0]})
@@ -58,8 +58,11 @@ app.post('/completedActivity/new', (req, res) => {
   CompletedActivity.create({
     userID: req.body.id,
     activityID: req.body.actID,
+    points:req.body.points,
     completedAt: new Date()
   })
+  CompletedActivity.sum('points', { where: { userID: req.body.id }
+  }).then(sum => {
   CompletedActivity.findAll({
     where: {
       userID: req.body.id,
@@ -71,17 +74,19 @@ app.post('/completedActivity/new', (req, res) => {
       model: Activity
     }]
   }).then((results) => {
-    Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address",  "Activities"."address","Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.body.id}})
+    Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude", "Activities"."points" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.body.id}})
     .then((unfinished) => {
       res.status(201)
       res.json({
         completedActivities: results,
-        unfinishedActivities: unfinished[0]
+        unfinishedActivities: unfinished[0],
+        userPoints: sum
+        })
       })
-    }).catch((error) => {
+    })
+  }).catch((error) => {
       res.status(400)
       res.json({errors: {message: "Activities not found"}})
-    })
   })
 })
 
@@ -134,7 +139,7 @@ app.post('/signup', (req, res) => {
                 model: Activity
               }]
             }).then((results) => {
-              Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
+              Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude", "Activities"."points" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
               .then((unfinished) => {
                 res.status(201)
                 res.json({
@@ -185,7 +190,7 @@ app.post('/login', (req, res) => {
                     model: Activity
                   }]
               }).then((results) => {
-                Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
+                Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude", "Activities"."points" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: user.id}})
                 .then((unfinished) => {
                   res.status(201)
                   res.json({
@@ -238,6 +243,33 @@ app.post('/user', (req, res) => {
         res.json({errors: {validations: validationErrors.array()}})
       }
     })
+})
+
+app.post('/user/points', (req, res) => {
+
+  CompletedActivity.sum('points', { where: { userID: req.body.id }
+  }).then(sum => {
+    CompletedActivity.findAll({
+      where: {
+        userID: req.body.id,
+        completedAt: {
+          $ne: null
+        }
+      },
+      include: [{
+        model: Activity
+      }]
+    }).then((results) => {
+      res.status(201)
+      res.json({
+        userPoints: sum,
+        completedActivities: results
+      })
+    })
+  }).catch((error) => {
+    res.status(400)
+    res.json({errors: {message: "Points not found."}})
+  })
 })
 
 module.exports = app
