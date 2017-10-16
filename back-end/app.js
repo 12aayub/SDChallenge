@@ -88,6 +88,7 @@ app.post('/completedActivity/new', (req, res) => {
 app.post('/activities/new', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('description', 'Is required').notEmpty()
+  req.checkBody('address', 'Is required').notEmpty()
   req.checkBody('longitude', 'Is required').notEmpty()
   req.checkBody('latitude', 'Is required').notEmpty()
   req.getValidationResult()
@@ -96,18 +97,71 @@ app.post('/activities/new', (req, res) => {
         Activity.create({
           name: req.body.name,
           description: req.body.description,
+          address: req.body.address,
           longitude: req.body.longitude,
           latitude: req.body.latitude
         })
-        Activity.findAll()
-        .then((activities) => {
-            res.json({activities:activities})
+        CompletedActivity.findAll({
+          where: {
+            userID: req.body.id,
+            completedAt: {
+              $ne: null
+            }
+          },
+          include: [{
+            model: Activity
+          }]
+        }).then((results) => {
+          Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address",  "Activities"."address","Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.body.id}})
+          .then((unfinished) => {
+            res.status(201)
+            res.json({
+              completedActivities: results,
+              unfinishedActivities: unfinished[0]
             })
+          })
+        })
       }else{
         res.status(400)
         res.json({errors: {validations: validationErrors.array()}})
       }
     })
+})
+
+app.post('/activities/delete', (req, res) => {
+  Activity.destroy({
+    where: {
+      id: req.body.actID
+    }
+  })
+  CompletedActivity.destroy({
+    where: {
+      activityID: req.body.actID
+    }
+  })
+  CompletedActivity.findAll({
+    where: {
+      userID: req.body.id,
+      completedAt: {
+        $ne: null
+      }
+    },
+    include: [{
+      model: Activity
+    }]
+  }).then((results) => {
+    Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address",  "Activities"."address","Activities"."longitude", "Activities"."latitude" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.body.id}})
+    .then((unfinished) => {
+      res.status(201)
+      res.json({
+        completedActivities: results,
+        unfinishedActivities: unfinished[0]
+      })
+    }).catch((error) => {
+      res.status(400)
+      res.json({errors: {message: "Activities not found"}})
+    })
+  })
 })
 
 app.post('/signup', (req, res) => {

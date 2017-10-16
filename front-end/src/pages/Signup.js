@@ -46,7 +46,7 @@ class Signup extends Component {
             </Row>
           </PageHeader>
 
-          <form >
+          <form>
               <Row>
                 <Col xs={12}>
                   <FormGroup>
