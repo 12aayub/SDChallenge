@@ -24,6 +24,10 @@ class NavBarUser extends Component {
              <Nav>
                <MenuItem eventKey={1} href="/">Challenges</MenuItem>
                <MenuItem eventKey={2} href="/profile">My Profile</MenuItem>
+               {
+                 this.props.user && (this.props.user.email=="admin@example.com") &&
+                 <MenuItem eventKey={3} href="/addactivity">Add Activity</MenuItem>
+               }
              </Nav>
              <Nav pullRight>
                <NavItem eventKey={2} onClick={this.props.onSubmit.bind(this)}

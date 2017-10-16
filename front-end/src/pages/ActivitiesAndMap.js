@@ -68,6 +68,11 @@ class ActivitiesAndMap extends Component {
     );
   }
 
+  delete(activity) {
+    this.props.handleDelete(activity.id)
+    this.setState({ showModal: false });
+  }
+
   close() {
     this.setState({ showModal: false });
   }
@@ -107,8 +112,7 @@ class ActivitiesAndMap extends Component {
         self.setState({ showModal: false })
         self.setState({ showModal2: true })
         document.getElementById("headerstyle").style.backgroundColor = '#8fdf8d'
-        setTimeout(function(){self.setState({ showModal2: false }) }, 3000);
-        // alert("Congrats on completing an activity! Keep it up!")
+        setTimeout(function(){self.setState({ showModal2: false }) }, 2500);
         document.getElementById("completeButton").innerText = "Complete"
       } else {
         self.setState({ showModal: false })
@@ -116,8 +120,7 @@ class ActivitiesAndMap extends Component {
         document.getElementById("headerstyle").style.backgroundColor = '#ff6666'
         document.getElementById("greeting").innerText = "Get closer!"
         document.getElementById("message").innerText = "You are outside of the activity's location."
-        setTimeout(function(){self.setState({ showModal2: false }) }, 3000);
-        // alert("You are outside of the activity's location. Get closer!")
+        setTimeout(function(){self.setState({ showModal2: false }) }, 2500);
         document.getElementById("completeButton").innerText = "Complete"
       }
     })
@@ -134,6 +137,10 @@ class ActivitiesAndMap extends Component {
               <img id = "locationIcon" src = '../locationIcon.png' alt = 'locationIcon'/>
               {this.state.currentActivity.name.toUpperCase()}
             </Modal.Title>
+            {
+              this.props.user && (this.props.user.email=="admin@example.com") &&
+              <button id = "deleteButton" onClick={this.delete.bind(this, this.state.currentActivity)}>DELETE FROM DATABASE</button>
+            }
           </Modal.Header>
           <Modal.Body>
             <h5>{this.state.currentActivity.description}</h5>

@@ -17,7 +17,9 @@ import {
   fetchAllActivities,
   fetchCompletedActivities,
   completeActivity,
-  fetchUnfinishedActivities
+  fetchUnfinishedActivities,
+  createNewActivity,
+  deleteActivity
 } from './actions/ActivitiesActions'
 
 const mapComponentToProps = (store) =>{
@@ -47,12 +49,21 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(handleUserLogin(this.state.apiUrl, input))
     }
 
+    handleLogout(){
+      this.props.dispatch(handleUserLogout())
+      window.location="/"
+    }
+
     handleComplete(activity){
       this.props.dispatch(completeActivity(this.state.apiUrl, activity))
     }
 
-    handleLogout(){
-      this.props.dispatch(handleUserLogout())
+    handleNewActivity(input){
+      this.props.dispatch(createNewActivity(this.state.apiUrl, input))
+    }
+
+    handleDelete(activity){
+       this.props.dispatch(deleteActivity(this.state.apiUrl, activity))
     }
 
     componentWillMount(){
@@ -60,10 +71,10 @@ export default connect(mapComponentToProps)(
       this.props.dispatch(fetchAllActivities(this.state.apiUrl))
       this.props.dispatch(fetchCompletedActivities(this.state.apiUrl))
       this.props.dispatch(fetchUnfinishedActivities(this.state.apiUrl))
+      console.log(this.props)
     }
 
     render() {
-        console.log(this.props)
       return (
         <Router>
           <div>
@@ -75,10 +86,10 @@ export default connect(mapComponentToProps)(
                 </video>
                 {
                   this.props.user &&
-                  <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
+                  <NavBarUser onSubmit={this.handleLogout.bind(this)} user={this.props.user}/>
                 }
                 {
-                  (!this.props.user) &&
+                  !this.props.user &&
                   <NavBar/>
                 }
                 <Grid>
@@ -86,22 +97,24 @@ export default connect(mapComponentToProps)(
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
                   {
-                    (!this.props.user) &&
+                    !this.props.user &&
                     <ActivitiesAndMap
                       activities={this.props.allActivities}
                       user={this.props.user}
                       handleComplete={this.handleComplete.bind(this)}
+                      handleDelete={this.handleDelete.bind(this)}
                     />
                   }
                   {
                     this.props.user &&
                     <div>
-                        <h2>HELLO, {this.props.user.name.toUpperCase()}!</h2>
+                        <h2>Hello, {this.props.user.name}!</h2>
                         <h3>Here are the challenges you have yet to complete:</h3>
                       <ActivitiesAndMap
                         activities={this.props.unfinishedActivities}
                         user={this.props.user}
                         handleComplete={this.handleComplete.bind(this)}
+                        handleDelete={this.handleDelete.bind(this)}
                       />
                     </div>
                   }
@@ -115,34 +128,28 @@ export default connect(mapComponentToProps)(
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
                   <source src='../Sunset-Siesta.mp4' type="video/ogg" />
                 </video>
-                {
-                  (!this.props.user) &&
-                  <NavBar/>
-                }
-                {
-                  this.props.user &&
-                  <NavBarUser onSubmit={this.handleLogout.bind(this)}/>
-                }
+                <NavBarUser onSubmit={this.handleLogout.bind(this)} user={this.props.user}/>
                 <Grid>
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  {
+                  {/*
                     !this.props.user &&
-                    <h1>Please log in to continue.</h1>
-                  }
+                    <Redirect to="/" />
+                  */}
                   {
                     this.props.user &&
-                    <h2>HELLO, {this.props.user.name.toUpperCase()}!</h2>
+                    <h2>Hello, {this.props.user.name}!</h2>
                   }
                   {
                     this.props.user &&
                     <ProfilePage
                       user={this.props.user}
                       completedActivities={this.props.completedActivities}
-                      onSubmit={this.handleLogout.bind(this)} />
+                      onSubmit={this.handleLogout.bind(this)}
+                      handleDelete={this.handleDelete.bind(this)}
+                    />
                   }
-
                 </Grid>
               </div>
             )}/>
@@ -185,18 +192,23 @@ export default connect(mapComponentToProps)(
               </div>
             )}/>
 
-            <Route exact path="/activities/new" render={props => (
+            <Route exact path="/addactivity" render={props => (
               <div className = "App">
                 <video id="background-video" loop autoPlay>
                   <source src='../Sunset-Siesta.mp4' type="video/mp4" />
                   <source src='../Sunset-Siesta.mp4' type="video/ogg" />
                 </video>
-                <NavBar/>
+                <NavBarUser onSubmit={this.handleLogout.bind(this)} user={this.props.user}/>
                 <Grid>
-                  {/*
-                    this.props.user.email==="admin@example.com" &&
                     <NewActivity onSubmit={this.handleNewActivity.bind(this)} />
-                  */}
+                    {
+                      this.props.user && (this.props.user.email!=="admin@example.com") &&
+                      <Redirect to="/" />
+                    }
+                    {/*
+                      !this.props.user &&
+                      <Redirect to="/" />
+                    */}
                 </Grid>
               </div>
             )}/>

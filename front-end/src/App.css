@@ -148,3 +148,8 @@ border-style: ridge;
     width:40%;
   }
 }
+
+#submitMessage{
+  color:white;
+  text-shadow: 1px 1px 2px #000000;
+}
