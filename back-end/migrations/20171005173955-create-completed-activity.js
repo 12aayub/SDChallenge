@@ -14,6 +14,9 @@ module.exports = {
       activityID: {
         type: Sequelize.INTEGER
       },
+      points: {
+        type: Sequelize.INTEGER
+      },
       completedAt: {
         allowNull: true,
         type: Sequelize.DATE
