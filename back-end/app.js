@@ -344,7 +344,7 @@ app.get('/api/leaderboard', (req, res) => {
 })
 
 app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../SDChallenge/front-end/build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '../front-end/build', 'index.html'));
 });
 
 module.exports = app
