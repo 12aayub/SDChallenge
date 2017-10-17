@@ -6,6 +6,7 @@ var app = express();
 var Activity = require('./models').Activity
 var User = require('./models').User
 var CompletedActivity = require('./models').CompletedActivity
+var path = require('path')
 
 
 app.use(express.static('public'))
