@@ -18,8 +18,8 @@ module.exports = {
           name: 'La Jolla Cove (La Jolla)',
           description: 'Small stretch of sand tucked between sandstone cliffs for swimmers, snorkelers & scuba divers. Great area to walk around and enjoy the ocean, although on some days the odor of seals and sea lions can be a bit much. Go check out the shops of downtown La Jolla afterward!',
           address: '1160 Coast Blvd, La Jolla, CA 92037',
-          latitude: 32.735073,
-          longitude: -117.148412,
+          latitude: 32.850259,
+          longitude: -117.272987,
           points: 10,
           createdAt: new Date(),
           updatedAt: new Date()

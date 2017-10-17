@@ -177,6 +177,7 @@ border-style: ridge;
   background-color: white;
   opacity: .7;
   margin-bottom: 60px;
+  border:solid 0.8px;
 }
 
 .leaderboard {
@@ -207,6 +208,7 @@ border-style: ridge;
   .boardContainer{
     height: 202px;
     padding-left: 6%;
+    border:solid 0.8px;
   }
   .leaderboard{
     width: 40%;
