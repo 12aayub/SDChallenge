@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, PageHeader } from 'react-bootstrap'
+import { Grid, PageHeader, Alert, HelpBlock } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
 
@@ -196,6 +196,13 @@ export default connect(mapComponentToProps)(
                     {this.props.user &&
                       <Redirect to="/" />
                     }
+                    {this.props.userError &&
+                      <div className = "signupAlert">
+                        <Alert className="login_error2" bsStyle="danger">
+                        {this.props.userError.message || "Are you sure you filled out each field?"}
+                        </Alert>
+                      </div>
+                    }
                 </Grid>
               </div>
             )}/>
@@ -211,9 +218,15 @@ export default connect(mapComponentToProps)(
                   <PageHeader>
                     THE SAN DIEGO CHALLENGE
                   </PageHeader>
-                  <Login onSubmit={this.handleLogin.bind(this)} />
+                  <Login
+                  onSubmit={this.handleLogin.bind(this)}  />
                     {this.props.user &&
                       <Redirect to="/" />
+                    }
+                    {this.props.userError &&
+                      <Alert className="login_error1" bsStyle="danger">
+                      User not found, try again!
+                      </Alert>
                     }
                 </Grid>
               </div>
