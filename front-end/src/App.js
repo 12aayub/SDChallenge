@@ -231,7 +231,7 @@ export default connect(mapComponentToProps)(
                       <Redirect to="/" />
                     }
                     {this.props.userError &&
-                      <Alert className="login_error1" bsStyle="danger">
+                      <Alert className="login_error" bsStyle="danger">
                       User not found, try again!
                       </Alert>
                     }
