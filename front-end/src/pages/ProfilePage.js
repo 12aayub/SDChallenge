@@ -79,6 +79,11 @@ class CompletedActivities extends Component {
     )
   }
 
+  delete(activity) {
+    this.props.handleDelete(activity.id)
+    this.setState({ showModal: false });
+  }
+
   close() {
     this.setState({ showModal: false });
   }
@@ -101,6 +106,10 @@ class CompletedActivities extends Component {
               <img id = "locationIcon" src = '../locationIcon.png' alt = 'locationIcon'/>
               {this.state.currentActivity.name.toUpperCase()}
             </Modal.Title>
+            {
+              this.props.user && (this.props.user.email=="admin@example.com") &&
+              <button id = "deleteButton" onClick={this.delete.bind(this, this.state.currentActivity)}>DELETE FROM DATABASE</button>
+            }
           </Modal.Header>
           <Modal.Body>
             <h5>POINTS: {this.state.currentActivity.points}</h5>

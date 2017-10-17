@@ -9,7 +9,6 @@ import {
   // Alert,
   // HelpBlock
 } from 'react-bootstrap'
-import { createNewActivity } from '../actions/ActivitiesActions'
 
 class NewActivity extends Component {
   constructor(props){
@@ -18,6 +17,7 @@ class NewActivity extends Component {
       form:{
         name: '',
         description:'',
+        address: '',
         latitude:'',
         longitude:''
       }
@@ -31,15 +31,18 @@ class NewActivity extends Component {
   }
 
   handleSubmit(){
-    this.props.dispatch(createNewActivity(this.props.apiUrl, this.state.form))
+    this.props.onSubmit(this.state.form)
+    this.setState({form:{ name: '', description:'', address: '', latitude:'', longitude:''}})
+    document.getElementById("submitMessage").innerText = "Activity Submitted"
+    setTimeout(function(){document.getElementById("submitMessage").innerText = ""}, 2000)
   }
 
   render() {
     return (
-      <form>
+      <form className = "loginForm">
         <h3> Add a new activity </h3>
         <Row>
-          <Col xs={6}>
+          <Col xs={12}>
             <FormGroup>
               <ControlLabel>Name</ControlLabel>
               <FormControl type="text" name="name"
@@ -50,7 +53,7 @@ class NewActivity extends Component {
         </Row>
 
         <Row>
-          <Col xs={6}>
+          <Col xs={12}>
             <FormGroup>
               <ControlLabel>Description</ControlLabel>
               <FormControl type="text" name="description"
@@ -61,7 +64,18 @@ class NewActivity extends Component {
         </Row>
 
         <Row>
-          <Col xs={6}>
+          <Col xs={12}>
+            <FormGroup>
+              <ControlLabel>Address</ControlLabel>
+              <FormControl type="text" name="address"
+              onChange={this.handleChange.bind(this)}
+              value={this.state.form.address}/>
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={12}>
             <FormGroup>
               <ControlLabel>Latitude</ControlLabel>
               <FormControl type="text" name="latitude"
@@ -72,7 +86,7 @@ class NewActivity extends Component {
         </Row>
 
         <Row>
-          <Col xs={6}>
+          <Col xs={12}>
             <FormGroup>
               <ControlLabel>Longitude</ControlLabel>
               <FormControl type="text" name="longitude"
@@ -83,11 +97,12 @@ class NewActivity extends Component {
         </Row>
 
         <Row>
-          <Col xs= {6}>
+          <Col xs= {12}>
             <Button id="submit"
             onClick={this.handleSubmit.bind(this)}> Create New Activity</Button>
           </Col>
         </Row>
+        <div id="submitMessage"></div>
       </form>
 
     )

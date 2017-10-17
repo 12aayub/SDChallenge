@@ -161,4 +161,9 @@ border-style: ridge;
   margin-top: 5%;
   margin-left: 42%;
   width:20%
+
+/*submit message on new activity*/
+#submitMessage{
+  color:white;
+  text-shadow: 1px 1px 2px #000000;
 }
