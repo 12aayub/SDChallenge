@@ -205,7 +205,7 @@ export default connect(mapComponentToProps)(
                     }
                     {this.props.userError &&
                       <div className = "signupAlert">
-                        <Alert className="login_error2" bsStyle="danger">
+                        <Alert className="login_error" bsStyle="danger">
                         {this.props.userError.message || "Are you sure you filled out each field?"}
                         </Alert>
                       </div>
@@ -227,13 +227,13 @@ export default connect(mapComponentToProps)(
                   </PageHeader>
                   <Login
                   onSubmit={this.handleLogin.bind(this)}  />
+                  {this.props.userError &&
+                    <Alert className="login_error" bsStyle="danger">
+                      {this.props.userError.message}
+                    </Alert>
+                  }
                     {this.props.user &&
                       <Redirect to="/" />
-                    }
-                    {this.props.userError &&
-                      <Alert className="login_error" bsStyle="danger">
-                      User not found, try again!
-                      </Alert>
                     }
                 </Grid>
               </div>

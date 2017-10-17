@@ -6,12 +6,13 @@ var uuid = require('uuid/v1')
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: { type: DataTypes.STRING, allowNull: false, validate:{isEmail: true} },
     encryptedPassword: DataTypes.STRING,
     salt: DataTypes.STRING,
     authToken: DataTypes.STRING,
     authTokenExpiration: DataTypes.DATE
   },
+
   {
     classMethods: {
       associate: function(models) {

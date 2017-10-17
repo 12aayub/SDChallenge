@@ -179,6 +179,7 @@ app.post('/api/signup', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
+  req.checkBody('email').isEmail().withMessage('must be an email')
   req.getValidationResult()
     .then((validationErrors) =>{
       if(validationErrors.isEmpty()){
@@ -214,11 +215,17 @@ app.post('/api/signup', (req, res) => {
             })
           } else {
             res.status(400)
-            res.json({errors: {message: "User not found"}})
+            res.json({errors: {message: "Are you sure you filled all the fields?"}})
           }
         }).catch((error) => {
+          var error_messages = []
+          error.errors.map(function(item){
+            var newMessage = "That email is taken"
+            item.message = newMessage
+            error_messages.push(newMessage)
+          })
           res.status(400)
-          res.json({errors: {message: "User not found"}})
+          res.json({errors: {message: error_messages.join(', ')}})
         })
       }else{
         res.status(400)
@@ -269,8 +276,14 @@ app.post('/api/login', (req, res) => {
             res.json({errors: {message: "User not found"}})
           }
         }).catch((error) => {
+          var error_messages = []
+          error.errors.map(function(item){
+            var newMessage = "Login information is incorrect"
+            item.message = newMessage
+            error_messages.push(newMessage)
+          })
           res.status(400)
-          res.json({errors: {message: "User not found"}})
+          res.json({errors: {message: error_messages.join(', ')}})
         })
       }else{
         res.status(400)
