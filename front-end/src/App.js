@@ -168,6 +168,13 @@ export default connect(mapComponentToProps)(
                     {this.props.user &&
                       <Redirect to="/" />
                     }
+                    {this.props.userError &&
+                      <div className = "signupAlert">
+                        <Alert className="login_error2" bsStyle="danger">
+                        {this.props.userError.message || "Are you sure you filled out each field?"}
+                        </Alert>
+                      </div>
+                    }
                 </Grid>
               </div>
             )}/>
@@ -189,7 +196,7 @@ export default connect(mapComponentToProps)(
                       <Redirect to="/" />
                     }
                     {this.props.userError &&
-                      <Alert className="login_error" bsStyle="danger">
+                      <Alert className="login_error1" bsStyle="danger">
                       User not found, try again!
                       </Alert>
                     }

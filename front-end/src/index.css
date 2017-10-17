@@ -14,11 +14,14 @@ body {
     }
 }
 
-.login_error {
+.login_error2 {
   margin-top: 20px;
-  margin-right: auto;
-  margin-left: auto;
-  width: 200px;
-  text-align: center;
+  display: inline-block;
+  /*justify-content: center;*/
+  max-width: 400px;
   white-space: nowrap;
+}
+
+.signupAlert{
+  text-align:center;
 }

@@ -37,7 +37,7 @@ class Signup extends Component {
 
   render(){
     return (
-      <Grid className = "loginForm">
+      <Grid  className = "loginForm">
           <PageHeader>
             <Row>
               <Col xs={12}>
