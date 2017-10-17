@@ -192,14 +192,15 @@ export default connect(mapComponentToProps)(
                   </PageHeader>
                   <Login
                   onSubmit={this.handleLogin.bind(this)}  />
+                  {this.props.userError &&
+                    <Alert className="login_error1" bsStyle="danger">
+                    User not found, try again!
+                    </Alert>
+                  }
                     {this.props.user &&
                       <Redirect to="/" />
                     }
-                    {this.props.userError &&
-                      <Alert className="login_error1" bsStyle="danger">
-                      User not found, try again!
-                      </Alert>
-                    }
+
                 </Grid>
               </div>
             )}/>
