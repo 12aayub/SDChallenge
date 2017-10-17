@@ -10,15 +10,15 @@ const MapComponent = compose(
 withProps({
   googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
   loadingElement: <div style={{ height: `100%` }} />,
-  containerElement: <div className= "mapContainer" style={{ height: `400px`, width:`49%`, display:`inline-block`}} />,
+  containerElement: <div className= "mapContainer" style={{ height: `600px`, width:`49%`, display:`inline-block`, float:`left`}} />,
   mapElement: <div style={{ height: `100%`}} />,
-  center: { lat: 32.722752, lng: -117.168310 },
+  center: { lat: 32.848773, lng: -117.149494 },
 }),
 withScriptjs,
 withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={11}
+    defaultZoom={10}
     defaultCenter={props.center}
     defaultOptions={{ styles:MapStyles }}
   >
@@ -54,7 +54,6 @@ class CompletedActivities extends Component {
         activities={this.props.completedActivities}
         />
         <div id = "challengesSection">
-          <h4 id = "challengesTitle">COMPLETED CHALLENGES</h4>
           <ListGroup className = "activityList">
           {this.props.completedActivities.map((index) =>{
             return (
@@ -112,7 +111,7 @@ class CompletedActivities extends Component {
             }
           </Modal.Header>
           <Modal.Body>
-            <h5>POINTS: {this.state.currentActivity.points}</h5>
+            <h4 id="pointsFont">POINTS: {this.state.currentActivity.points}</h4>
             <h5>{this.state.currentActivity.description}</h5>
 
           </Modal.Body>

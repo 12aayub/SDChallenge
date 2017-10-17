@@ -20,7 +20,7 @@ import {
   completeActivity,
   fetchUnfinishedActivities,
   fetchUserPoints,
-  fetchLeaderboard
+  fetchLeaderboard,
   createNewActivity,
   deleteActivity
 } from './actions/ActivitiesActions'
@@ -232,10 +232,10 @@ export default connect(mapComponentToProps)(
                       this.props.user && (this.props.user.email!=="admin@example.com") &&
                       <Redirect to="/" />
                     }
-                    {/*
-                      !this.props.user &&
+                    {
+                      (!this.props.user) && (!this.props.loading) &&
                       <Redirect to="/" />
-                    */}
+                    }
                 </Grid>
               </div>
             )}/>
