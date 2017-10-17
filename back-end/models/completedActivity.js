@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var CompletedActivity = sequelize.define('CompletedActivity', {
     userID: DataTypes.INTEGER,
     activityID: DataTypes.INTEGER,
+    points: DataTypes.INTEGER,
     completedAt: DataTypes.DATE
   }, {
     classMethods: {

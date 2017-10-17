@@ -49,15 +49,17 @@ export function fetchUnfinishedActivities(apiUrl){
 }
 
 //action to complete an activity
-export function completeActivity(apiUrl, activityID){
+export function completeActivity(apiUrl, activityID, activityPT){
   return ((dispatch)=>{
     var userID = localStorage.getItem('userID');
     fetch(`${apiUrl}/completedActivity/new`,
       {
         body: JSON.stringify({
             id: userID,
-            actID: activityID
-        }),
+            actID: activityID,
+            points: activityPT
+          }
+        ),
         headers: { 'Content-Type': 'application/json' },
         method: "POST"
       }
@@ -73,6 +75,14 @@ export function completeActivity(apiUrl, activityID){
       dispatch({
         type: 'FETCH_COMPLETED_ACTIVITIES',
         payload: parsedResponse.completedActivities
+      })
+      dispatch({
+        type: 'FETCH_USER_POINTS',
+        payload: parsedResponse.userPoints
+      })
+      dispatch({
+        type: 'FETCH_LEADERBOARD',
+        payload: parsedResponse.leaderboard
       })
     })
   })
@@ -131,4 +141,50 @@ export function deleteActivity(apiUrl, activityID){
       })
     })
 })
+}
+
+//fetch user points from completed activities
+export function fetchUserPoints(apiUrl){
+  return ((dispatch)=>{
+    var userID = localStorage.getItem('userID');
+    fetch(`${apiUrl}/user/points`,
+      {
+        body: JSON.stringify(
+          {
+            id: userID
+          }
+        ),
+        headers: { 'Content-Type': 'application/json' },
+        method: "POST"
+      }
+    )
+    .then((rawResponse)=>{
+      return rawResponse.json()
+    })
+    .then((parsedResponse) =>{
+      dispatch({
+        type: 'FETCH_USER_POINTS',
+        payload: parsedResponse.userPoints
+      })
+      dispatch({
+        type: 'FETCH_COMPLETED_ACTIVITIES',
+        payload: parsedResponse.completedActivities
+      })
+    })
+  })
+}
+
+export function fetchLeaderboard(apiUrl){
+  return ((dispatch)=>{
+    fetch(`${apiUrl}/leaderboard`)
+    .then((rawResponse)=>{
+      return rawResponse.json()
+    })
+    .then((parsedResponse) =>{
+      dispatch({
+        type: 'FETCH_LEADERBOARD',
+        payload: parsedResponse.leaderboard
+      })
+    })
+  })
 }

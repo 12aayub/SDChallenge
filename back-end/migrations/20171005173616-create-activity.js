@@ -23,6 +23,9 @@ module.exports = {
       latitude: {
         type: Sequelize.FLOAT
       },
+      points: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
