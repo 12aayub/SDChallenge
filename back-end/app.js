@@ -12,7 +12,7 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
-app.use(express.static(path.resolve(__dirname, '../SDChallenge/front-end/build')));
+app.use(express.static(path.resolve(__dirname, '../front-end/build')));
 
 app.get('/api/', (req, res) => {
   res.json({message: 'successful "get" request to back-end root'})
