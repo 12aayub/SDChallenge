@@ -10,15 +10,15 @@ const MapComponent = compose(
 withProps({
   googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
   loadingElement: <div style={{ height: `100%` }} />,
-  containerElement: <div className= "mapContainer" style={{ height: `400px`, width:`49%`, display:`inline-block`}} />,
+  containerElement: <div className= "mapContainer" style={{ height: `600px`, width:`49%`, display:`inline-block`, float:`left`}} />,
   mapElement: <div style={{ height: `100%`}} />,
-  center: { lat: 32.722752, lng: -117.168310 },
+  center: { lat: 32.848773, lng: -117.149494 },
 }),
 withScriptjs,
 withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={11}
+    defaultZoom={10}
     defaultCenter={props.center}
     defaultOptions={{ styles:MapStyles }}
   >
@@ -30,6 +30,7 @@ withGoogleMap
 )
 
 class CompletedActivities extends Component {
+
   handleLogout(){
     this.props.onSubmit(handleUserLogout)
       }
@@ -47,24 +48,25 @@ class CompletedActivities extends Component {
     return (
       <div>
         <h3>Congrats on completing these challenges!</h3>
+        <h2>Your total points: {this.props.userPoints}</h2>
         <MapComponent
         onMarkerClick={this.open.bind(this)}
         activities={this.props.completedActivities}
         />
         <div id = "challengesSection">
-          <h4 id = "challengesTitle">COMPLETED CHALLENGES</h4>
           <ListGroup className = "activityList">
           {this.props.completedActivities.map((index) =>{
             return (
                 <ListGroupItem key = {index.Activity.id} className = "activity">
                   <div>
                     <p>Activity: {index.Activity.name}</p>
+                    <p>Description: {index.Activity.description}</p>
+                    <p>Address: {index.Activity.address}</p>
+                    <p>Points: {index.Activity.points}</p>
                     <p>Completed At: {
                       new Date(index.completedAt).getMonth() + 1 + '-' + new Date(index.completedAt).getDate() + '-' + new Date(index.completedAt).getFullYear()
                     }
                     </p>
-                    <p>Description: {index.Activity.description}</p>
-                    <p>Address: {index.Activity.address}</p>
                   </div>
                 </ListGroupItem>
               )
@@ -109,6 +111,7 @@ class CompletedActivities extends Component {
             }
           </Modal.Header>
           <Modal.Body>
+            <h4 id="pointsFont">POINTS: {this.state.currentActivity.points}</h4>
             <h5>{this.state.currentActivity.description}</h5>
 
           </Modal.Body>

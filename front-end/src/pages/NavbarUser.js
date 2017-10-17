@@ -15,6 +15,7 @@ class NavBarUser extends Component {
     return (
         <Navbar collapseOnSelect>
            <Navbar.Header  >
+           <img id = "locationIcon2" src = '../locationIcon.png' alt = 'locationIcon'/>
              <Navbar.Brand >
                <a href="/">SDChallenge</a>
              </Navbar.Brand>

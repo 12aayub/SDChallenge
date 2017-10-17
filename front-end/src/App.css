@@ -30,6 +30,13 @@ h3{
   text-align:center;
   margin-bottom:35px;
 }
+
+/*About text*/
+#about{
+  color: #585e63;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 /*NavBar styles*/
 .navbar-default{
   background-image:none;
@@ -42,6 +49,13 @@ h3{
   margin-right:6px;
 }
 
+#locationIcon2{
+  float:left;
+  margin-top:8px;
+  margin-right:8px;
+  height:30px;
+  width:auto;
+}
 /*Map styles*/
 .mapContainer{
 margin-top:10px;
@@ -54,6 +68,7 @@ border-style: ridge;
   display:inline-block;
   width:49%;
   float:right;
+  margin-top:10px;
 }
 #challengesTitle{
   color:white;
@@ -78,7 +93,7 @@ border-style: ridge;
   background-color:#e6e6e6;
   opacity:0.55;
   border:solid 0.8px;
-  margin:10px;
+  margin-bottom:10px;
 }
 .activityTitle{
   background-color: transparent;
@@ -113,6 +128,11 @@ border-style: ridge;
   color:white;
   font-family: 'Josefin Sans', sans-serif;
 }
+
+#pointsFont{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 .modal-footer{
   background-color:#ffeee6;
 }
@@ -149,6 +169,83 @@ border-style: ridge;
   }
 }
 
+/*leaderboard*/
+.boardContainer{
+  float:right;
+  width:49%;
+  height: auto;
+  background-color: white;
+  opacity: .7;
+  margin-bottom: 60px;
+  border:solid 0.8px;
+}
+
+.leaderboard {
+  color: #585e63;
+  text-align: center;
+  margin-top: -3%;
+  width: 100%;
+  display: inline-block;
+}
+
+#boardTitle {
+  color: #585e63;
+  text-shadow: none;
+  font-size: 1em;
+  margin-bottom: 0px;
+}
+
+.wreath {
+  display: none;
+}
+
+@media (min-width:961px){
+  .wreath {
+    display: inline-block;
+    margin-top: -30%;
+    opacity: .5
+  }
+  .boardContainer{
+    height: 202px;
+    padding-left: 6%;
+    border:solid 0.8px;
+  }
+  .leaderboard{
+    width: 40%;
+    margin-right: 20px;
+  }
+  #boardTitle{
+    font-size: 1.75em;
+    margin-top: 30px;
+    margin-left: 6%;
+  }
+}
+
+@media (max-width:1200px) and (min-width:961px) {
+  .wreath {
+    display: none;
+  }
+  .leaderboard {
+    color: #585e63;
+    text-align: center;
+    width: 100%;
+    margin-top: -3%;
+    display: inline-block;
+  }
+  .boardContainer{
+    float:right;
+    width:49%;
+    height: auto;
+    margin-bottom: 60px;
+  }
+  #boardTitle {
+    color: #585e63;
+    text-shadow: none;
+    font-size: 1.25em;
+    margin-bottom: 0px;
+  }
+}
+/*submit message on new activity*/
 #submitMessage{
   color:white;
   text-shadow: 1px 1px 2px #000000;

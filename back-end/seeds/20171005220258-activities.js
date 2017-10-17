@@ -10,6 +10,7 @@ module.exports = {
           address: '704 J St, San Diego, CA 92101',
           latitude: 32.709536,
           longitude: -117.158021,
+          points: 5,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -17,8 +18,9 @@ module.exports = {
           name: 'La Jolla Cove (La Jolla)',
           description: 'Small stretch of sand tucked between sandstone cliffs for swimmers, snorkelers & scuba divers. Great area to walk around and enjoy the ocean, although on some days the odor of seals and sea lions can be a bit much. Go check out the shops of downtown La Jolla afterward!',
           address: '1160 Coast Blvd, La Jolla, CA 92037',
-          latitude: 32.735073,
-          longitude: -117.148412,
+          latitude: 32.850259,
+          longitude: -117.272987,
+          points: 10,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -28,6 +30,7 @@ module.exports = {
           address: '3960 Normal St, San Diego, CA 92103',
           latitude: 32.75055,
           longitude: -117.1492965,
+          points: 20,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -37,6 +40,7 @@ module.exports = {
           address: '689 H St, Chula Vista, CA 91910',
           latitude: 32.6301861,
           longitude: -117.0932447,
+          points: 30,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -46,6 +50,7 @@ module.exports = {
           address: 'Spruce St 1st Ave, San Diego, CA 92103',
           latitude: 32.7386961,
           longitude: -117.1661019,
+          points: 25,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -55,6 +60,7 @@ module.exports = {
           address: '1500 Orange Ave, Coronado, CA 92118',
           latitude: 32.6815235,
           longitude: -117.1778507,
+          points: 20,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -64,6 +70,7 @@ module.exports = {
           address: '5704 Paseo Del Norte, Carlsbad, CA 92008',
           latitude: 33.1230447,
           longitude: -117.3175875,
+          points: 40,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -73,6 +80,7 @@ module.exports = {
           address: '600 Fifth Avenue, San Diego, CA 92101',
           latitude: 32.7119326,
           longitude: -117.1604126,
+          points: 5,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -82,6 +90,7 @@ module.exports = {
           address: '2250 Pan American Rd E, San Diego, CA 92101',
           latitude: 32.731206,
           longitude: -117.150347,
+          points: 15,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -91,6 +100,7 @@ module.exports = {
           address: '2800 Torrey Pines Scenic Dr, La Jolla, CA 92037',
           latitude: 32.8898837,
           longitude: -117.2511938,
+          points: 50,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -100,6 +110,7 @@ module.exports = {
           address: '641 S Coast Highway 101, Encinitas, CA',
           latitude: 33.0441042,
           longitude: -117.2933546,
+          points: 35,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -109,6 +120,7 @@ module.exports = {
           address: '8199 Clairemont Mesa Blvd m, San Diego, CA 92111',
           latitude: 32.8322319,
           longitude: -117.1470856,
+          points: 10,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -118,6 +130,7 @@ module.exports = {
           address: '4211 Camino De La Plaza, San Diego, CA 92173',
           latitude: 32.5438314,
           longitude: -117.0408468,
+          points: 45,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -127,6 +140,7 @@ module.exports = {
           address: '1800 Cabrillo Memorial Dr, San Diego, CA 92106',
           latitude: 32.673631,
           longitude: -117.241105,
+          points: 25,
           createdAt: new Date(),
           updatedAt: new Date()
         }

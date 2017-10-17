@@ -5,7 +5,8 @@ import {
   FormGroup,
   FormControl,
   Row,
-  Button
+  Button,
+  Grid
   // Alert,
   // HelpBlock
 } from 'react-bootstrap'
@@ -39,7 +40,8 @@ class NewActivity extends Component {
 
   render() {
     return (
-      <form className = "loginForm">
+      <Grid className = "loginForm">
+      <form>
         <h3> Add a new activity </h3>
         <Row>
           <Col xs={12}>
@@ -104,7 +106,7 @@ class NewActivity extends Component {
         </Row>
         <div id="submitMessage"></div>
       </form>
-
+      </Grid>
     )
   }
 }
