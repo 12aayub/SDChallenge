@@ -12,18 +12,19 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
+app.use(express.static(path.resolve(__dirname, '../SDChallenge/front-end/build')));
 
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
   res.json({message: 'successful "get" request to back-end root'})
 });
 
-app.get('/activities', (req, res) => {
+app.get('/api/activities', (req, res) => {
   Activity.findAll().then((results) => {
     res.json({activities:results})
     })
 })
 
-app.get('/completedactivities/:id', (req, res) => {
+app.get('/api/completedactivities/:id', (req, res) => {
   CompletedActivity.findAll({
     where: {
       userID: req.params.id,
@@ -43,7 +44,7 @@ app.get('/completedactivities/:id', (req, res) => {
   })
 })
 
-app.get('/unfinishedactivities/:id', (req, res) => {
+app.get('/api/unfinishedactivities/:id', (req, res) => {
   Activity.sequelize.query('SELECT "Activities"."id", "Activities"."name", "Activities"."description", "Activities"."address", "Activities"."longitude", "Activities"."latitude", "Activities"."points" FROM "Activities" LEFT OUTER JOIN "CompletedActivities" ON "CompletedActivities"."activityID" = "Activities"."id" AND "CompletedActivities"."userID" = :id WHERE "CompletedActivities"."id" IS NULL', {replacements:{id: req.params.id}})
   .then((results) => {
     res.status(201)
@@ -54,7 +55,7 @@ app.get('/unfinishedactivities/:id', (req, res) => {
   })
 })
 
-app.post('/completedActivity/new', (req, res) => {
+app.post('/api/completedActivity/new', (req, res) => {
   CompletedActivity.create({
     userID: req.body.id,
     activityID: req.body.actID,
@@ -94,7 +95,7 @@ app.post('/completedActivity/new', (req, res) => {
   })
 })
 
-app.post('/activities/new', (req, res) => {
+app.post('/api/activities/new', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('description', 'Is required').notEmpty()
   req.checkBody('address', 'Is required').notEmpty()
@@ -137,7 +138,7 @@ app.post('/activities/new', (req, res) => {
     })
 })
 
-app.post('/activities/delete', (req, res) => {
+app.post('/api/activities/delete', (req, res) => {
   Activity.destroy({
     where: {
       id: req.body.actID
@@ -173,7 +174,7 @@ app.post('/activities/delete', (req, res) => {
   })
 })
 
-app.post('/signup', (req, res) => {
+app.post('/api/signup', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
@@ -225,7 +226,7 @@ app.post('/signup', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
   req.getValidationResult()
@@ -277,7 +278,7 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/user', (req, res) => {
+app.post('/api/user', (req, res) => {
   req.checkBody('authToken', 'Is required').notEmpty()
 
   req.getValidationResult()
@@ -303,7 +304,7 @@ app.post('/user', (req, res) => {
     })
 })
 
-app.post('/user/points', (req, res) => {
+app.post('/api/user/points', (req, res) => {
   CompletedActivity.sum('points', { where: { userID: req.body.id }
   }).then(sum => {
     CompletedActivity.findAll({
@@ -329,7 +330,7 @@ app.post('/user/points', (req, res) => {
   })
 })
 
-app.get('/leaderboard', (req, res) => {
+app.get('/api/leaderboard', (req, res) => {
   CompletedActivity.sequelize.query('SELECT "CompletedActivity"."userID", sum("CompletedActivity"."points") AS "totalPoints", "User"."name" AS "Username" FROM "CompletedActivities" AS "CompletedActivity" LEFT OUTER JOIN "Users" AS "User" ON "CompletedActivity"."userID" = "User"."id" GROUP BY "userID", "User"."name" ORDER BY "totalPoints" DESC LIMIT 5')
   .then((results) => {
     res.status(201)
@@ -341,5 +342,9 @@ app.get('/leaderboard', (req, res) => {
     res.json({errors: {message: "Leaders not found."}})
   })
 })
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../SDChallenge/front-end/build', 'index.html'));
+});
 
 module.exports = app

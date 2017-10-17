@@ -38,12 +38,19 @@ const mapComponentToProps = (store) =>{
   }
 }
 
+var apiUrl
+if(process.env.NODE_ENV === 'production'){
+  apiUrl = "/api"
+} else {
+  apiUrl = "http://localhost:3000/"
+}
+
 export default connect(mapComponentToProps)(
   class App extends Component {
     constructor(props){
       super(props);
       this.state = {
-        apiUrl: "http://localhost:3000"
+        apiUrl: apiUrl
       }
     }
 
