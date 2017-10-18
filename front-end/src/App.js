@@ -205,7 +205,7 @@ export default connect(mapComponentToProps)(
                     {this.props.submitError &&
                       <div className = "signupAlert">
                         <Alert className="login_error" bsStyle="danger">
-                        {this.props.userError || "Are you sure you filled out each field?"}
+                        {this.props.userError.message || "Are you sure you filled out each field?"}
                         </Alert>
                       </div>
                     }
