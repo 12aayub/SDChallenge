@@ -54,6 +54,7 @@ h3{
   float:left;
   margin-top:8px;
   margin-right:8px;
+  margin-left:15px;
   height:30px;
   width:auto;
 }
@@ -106,6 +107,11 @@ border-style: ridge;
   border:solid 0.8px;
   margin-bottom:10px;
 }
+
+.activityList.list-group{
+  margin-bottom: 0px;
+}
+
 .activityTitle{
   background-color: transparent;
   border:none;
