@@ -276,7 +276,7 @@ app.post('/api/login', (req, res) => {
             })
           } else {
             res.status(400)
-            res.json({errors: {message: "User not found"}})
+            res.json({errors: {message: "Login information is incorrect"}})
           }
         }).catch((error) => {
           res.status(400)
