@@ -33,11 +33,22 @@ h3{
 
 /*About text*/
 #about{
-  color: #585e63;
+  color: #000;
   font-family: 'Josefin Sans', sans-serif;
-  text-align: center;
-  width: 80%;
-  margin-left: 10%;
+  background-color: white;
+  opacity: .6;
+  border:solid 0.8px;
+}
+
+@media (min-width:961px){
+  #about{
+    text-align: center;
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 10px;
+  }
 }
 
 /*NavBar styles*/
