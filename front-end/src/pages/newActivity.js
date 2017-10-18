@@ -105,7 +105,7 @@ class NewActivity extends Component {
               <ControlLabel>Points</ControlLabel>
               <FormControl type="text" name="points"
               onChange={this.handleChange.bind(this)}
-              value={this.state.form.longitude}/>
+              value={this.state.form.points}/>
             </FormGroup>
           </Col>
         </Row>
