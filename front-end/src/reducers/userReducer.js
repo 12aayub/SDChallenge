@@ -21,6 +21,14 @@ export default (currentState=initialState, action) =>{
       newState = Object.assign(
         {},
         currentState,
+        {currentUser: null, error: action.payload, loading: false, submitError: false}
+      )
+      break
+    }
+    case("FETCHED_USER_ERROR_AFTER_SUBMIT"):{
+      newState = Object.assign(
+        {},
+        currentState,
         {currentUser: null, error: action.payload, loading: false, submitError: true}
       )
       break

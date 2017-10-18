@@ -16,7 +16,7 @@ export function addNewUser(apiUrl, params){
     .then((parsedResponse) =>{
       if(parsedResponse.errors){
         dispatch({
-          type: 'FETCHED_USER_ERROR',
+          type: 'FETCHED_USER_ERROR_AFTER_SUBMIT',
           payload: parsedResponse.errors
         })
       }else{
@@ -55,7 +55,7 @@ export function handleUserLogin(apiUrl, params){
     .then((parsedResponse) =>{
         if(parsedResponse.errors){
           dispatch({
-            type: 'FETCHED_USER_ERROR',
+            type: 'FETCHED_USER_ERROR_AFTER_SUBMIT',
             payload: parsedResponse.errors
           })
         }else{
