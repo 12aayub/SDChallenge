@@ -109,10 +109,6 @@ border-style: ridge;
   margin-bottom:10px;
 }
 
-.activityList.list-group{
-  margin-bottom: 0px;
-}
-
 .activityTitle{
   background-color: transparent;
   border:none;
