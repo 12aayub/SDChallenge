@@ -279,14 +279,8 @@ app.post('/api/login', (req, res) => {
             res.json({errors: {message: "User not found"}})
           }
         }).catch((error) => {
-          var error_messages = []
-          error.errors.map(function(item){
-            var newMessage = "Login information is incorrect"
-            item.message = newMessage
-            error_messages.push(newMessage)
-          })
           res.status(400)
-          res.json({errors: {message: error_messages.join(', ')}})
+          res.json({errors: {message: "Login information is incorrect"}})
         })
       }else{
         res.status(400)
