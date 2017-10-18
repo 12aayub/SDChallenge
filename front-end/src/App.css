@@ -86,22 +86,28 @@ border-style: ridge;
 }
 .activityList{
   width:100%;
-  height:350px;
+  height:396px;
   margin-bottom: 0px;
   overflow:hidden;
   overflow-y:scroll;
   display:inline-block;
 }
+
 @media (min-width:961px){
   .activityList{
     width:100%;
-    height:370px;
-    margin-bottom: 20px;
+    height:374px;
+    margin-bottom: 16px;
     overflow:hidden;
     overflow-y:scroll;
     display:inline-block;
   }
 }
+
+.activityList.list-group{
+  margin-bottom: 20px
+}
+
 .activity{
   background-color:#e6e6e6;
   opacity:0.55;
@@ -246,6 +252,12 @@ border-style: ridge;
 }
 
 @media (max-width:1200px) and (min-width:961px) {
+  .leaderboard ol{
+    -webkit-padding-start: 40px;
+    width: 60%;
+    margin-left: 22%
+  }
+
   .wreath {
     display: none;
   }
@@ -261,6 +273,7 @@ border-style: ridge;
     width:49%;
     height: auto;
     margin-bottom: 60px;
+    padding-left: 0;
   }
   #boardTitle {
     color: #585e63;
