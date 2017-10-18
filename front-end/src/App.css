@@ -36,6 +36,8 @@ h3{
   color: #585e63;
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
+  width: 80%;
+  margin-left: 10%;
 }
 
 /*NavBar styles*/

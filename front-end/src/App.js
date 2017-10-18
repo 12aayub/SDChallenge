@@ -115,11 +115,13 @@ export default connect(mapComponentToProps)(
                   {
                     (!this.props.user) &&
                     <div>
-                      <h4 id="about">Welcome to the San Diego Challenge! Whether you’re new or old to San Diego, we think you’ll find these challenges to be a fun and informative way to explore America’s Finest City. We’ve put together a fantastic list that will bring you, your friends, and family to the heart of what makes San Diego amazing.
-                      <p>To get started, just click around the Challenges List until you find the one you want to do. Once you get to the location and complete the challenge, click the Complete button. Each challenge awards points upon completion. Your total score will be displayed on your user profile as well as the Leaderboard.</p>
-                      <p>Note: You’ll have to be at the location with your location services enabled in order to complete the challenge! </p>
-                      <p>OK that’s it! Have fun exploring!</p>
-                      </h4>
+                      <div id="about">
+                        <h4>Welcome to the San Diego Challenge! Whether you’re new or old to San Diego, we think you’ll find these challenges to be a fun and informative way to explore America’s Finest City. We’ve put together a fantastic list that will bring you, your friends, and family to the heart of what makes San Diego amazing.
+                        <p>To get started, just click around the Challenges List until you find the one you want to do. Once you get to the location and complete the challenge, click the Complete button. Each challenge awards points upon completion. Your total score will be displayed on your user profile as well as the Leaderboard.</p>
+                        <p>Note: You’ll have to be at the location with your location services enabled in order to complete the challenge! </p>
+                        <p>OK that’s it! Have fun exploring!</p>
+                        </h4>
+                      </div>
                       <ActivitiesAndMap
                         activities={this.props.allActivities}
                         user={this.props.user}
