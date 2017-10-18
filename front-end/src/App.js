@@ -34,7 +34,8 @@ const mapComponentToProps = (store) =>{
     unfinishedActivities: store.unfinishedActivities.unfinishedActivities,
     userPoints: store.userPoints.userPoints,
     leaderboard: store.leaderboard.leaderboard,
-    loading: store.user.loading
+    loading: store.user.loading,
+    submitError: store.user.submitError
   }
 }
 
@@ -53,8 +54,6 @@ export default connect(mapComponentToProps)(
         apiUrl: apiUrl
       }
     }
-
-
 
     handleNewUser(input){
       this.props.dispatch(addNewUser(this.state.apiUrl, input))
@@ -203,7 +202,7 @@ export default connect(mapComponentToProps)(
                     {this.props.user &&
                       <Redirect to="/" />
                     }
-                    {this.props.userError &&
+                    {this.props.submitError &&
                       <div className = "signupAlert">
                         <Alert className="login_error" bsStyle="danger">
                         {this.props.userError || "Are you sure you filled out each field?"}
@@ -227,7 +226,7 @@ export default connect(mapComponentToProps)(
                   </PageHeader>
                   <Login
                   onSubmit={this.handleLogin.bind(this)}  />
-                  {this.props.userError &&
+                  {this.props.submitError &&
                     <Alert className="login_error" bsStyle="danger">
                       {this.props.userError.message}
                     </Alert>

@@ -1,7 +1,8 @@
 const initialState = {
   currentUser: null,
   error: null,
-  loading: true
+  loading: true,
+  submitError: false
 }
 export default (currentState=initialState, action) =>{
   let newState
@@ -12,7 +13,7 @@ export default (currentState=initialState, action) =>{
       newState = Object.assign(
         {},
         currentState,
-        {currentUser: action.payload, error: null, loading: false}
+        {currentUser: action.payload, error: null, loading: false, submitError: false}
       )
       break
     }
@@ -20,7 +21,7 @@ export default (currentState=initialState, action) =>{
       newState = Object.assign(
         {},
         currentState,
-        {currentUser: null, error: action.payload, loading: false}
+        {currentUser: null, error: action.payload, loading: false, submitError: true}
       )
       break
     }
@@ -28,7 +29,7 @@ export default (currentState=initialState, action) =>{
       newState = Object.assign(
         {},
         currentState,
-        {currentUser: null, loading: false}
+        {currentUser: null, loading: false, submitError: false}
       )
       break
     }
