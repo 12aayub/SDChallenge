@@ -38,11 +38,11 @@ h3{
   background-color: white;
   opacity: .6;
   border:solid 0.8px;
+  text-align: center;
 }
 
 @media (min-width:961px){
   #about{
-    text-align: center;
     width: 100%;
     padding-top: 5px;
     padding-left: 10%;
