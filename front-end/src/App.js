@@ -227,9 +227,11 @@ export default connect(mapComponentToProps)(
                   <Login
                   onSubmit={this.handleLogin.bind(this)}  />
                   {this.props.submitError &&
-                    <Alert className="login_error" bsStyle="danger">
-                      {this.props.userError.message}
-                    </Alert>
+                    <div className = "signupAlert">
+                      <Alert className="login_error" bsStyle="danger">
+                        {this.props.userError.message || "Are you sure you filled out each field?"}
+                      </Alert>
+                    </div>
                   }
                     {this.props.user &&
                       <Redirect to="/" />
