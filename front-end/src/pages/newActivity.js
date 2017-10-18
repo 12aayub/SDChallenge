@@ -47,7 +47,7 @@ class NewActivity extends Component {
         <Row>
           <Col xs={12}>
             <FormGroup>
-              <ControlLabel>Name</ControlLabel>
+              <ControlLabel>Name (Location)</ControlLabel>
               <FormControl type="text" name="name"
               onChange={this.handleChange.bind(this)}
               value={this.state.form.name}/>
