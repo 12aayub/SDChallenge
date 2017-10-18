@@ -7,8 +7,9 @@ var Activity = require('./models').Activity
 var User = require('./models').User
 var CompletedActivity = require('./models').CompletedActivity
 var path = require('path')
+var sslRedirect = require('heroku-ssl-redirect')
 
-
+app.use(sslRedirect())
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
