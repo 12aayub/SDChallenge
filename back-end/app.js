@@ -102,6 +102,7 @@ app.post('/api/activities/new', (req, res) => {
   req.checkBody('address', 'Is required').notEmpty()
   req.checkBody('longitude', 'Is required').notEmpty()
   req.checkBody('latitude', 'Is required').notEmpty()
+  req.checkBody('points', 'Is required').notEmpty()
   req.getValidationResult()
     .then((validationErrors) =>{
       if(validationErrors.isEmpty()){
@@ -110,7 +111,8 @@ app.post('/api/activities/new', (req, res) => {
           description: req.body.description,
           address: req.body.address,
           longitude: req.body.longitude,
-          latitude: req.body.latitude
+          latitude: req.body.latitude,
+          points: req.body.points
         })
         CompletedActivity.findAll({
           where: {

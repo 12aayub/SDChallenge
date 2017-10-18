@@ -17,10 +17,11 @@ class NewActivity extends Component {
     this.state = {
       form:{
         name: '',
-        description:'',
+        description: '',
         address: '',
-        latitude:'',
-        longitude:''
+        latitude: '',
+        longitude: '',
+        points: ''
       }
     }
   }
@@ -33,7 +34,7 @@ class NewActivity extends Component {
 
   handleSubmit(){
     this.props.onSubmit(this.state.form)
-    this.setState({form:{ name: '', description:'', address: '', latitude:'', longitude:''}})
+    this.setState({form:{ name:'', description:'', address:'', latitude:'', longitude:'', points:''}})
     document.getElementById("submitMessage").innerText = "Activity Submitted"
     setTimeout(function(){document.getElementById("submitMessage").innerText = ""}, 2000)
   }
@@ -92,6 +93,17 @@ class NewActivity extends Component {
             <FormGroup>
               <ControlLabel>Longitude</ControlLabel>
               <FormControl type="text" name="longitude"
+              onChange={this.handleChange.bind(this)}
+              value={this.state.form.longitude}/>
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={12}>
+            <FormGroup>
+              <ControlLabel>Points</ControlLabel>
+              <FormControl type="text" name="points"
               onChange={this.handleChange.bind(this)}
               value={this.state.form.longitude}/>
             </FormGroup>
