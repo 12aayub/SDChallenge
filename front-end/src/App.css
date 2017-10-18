@@ -104,10 +104,6 @@ border-style: ridge;
   }
 }
 
-.activityList.list-group{
-  margin-bottom: 20px
-}
-
 .activity{
   background-color:#e6e6e6;
   opacity:0.55;
@@ -195,7 +191,9 @@ border-style: ridge;
 .boardContainer{
   float:right;
   width:49%;
-  height: auto;
+  height: 197px;
+  overflow:hidden;
+  overflow-y:scroll;
   background-color: white;
   opacity: .7;
   margin-bottom: 60px;
@@ -279,7 +277,8 @@ border-style: ridge;
     color: #585e63;
     text-shadow: none;
     font-size: 1.25em;
-    margin-bottom: 0px;
+    margin-bottom: 0;
+    margin-left: 0;
   }
 }
 /*submit message on new activity*/
