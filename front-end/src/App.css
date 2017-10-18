@@ -85,7 +85,8 @@ border-style: ridge;
 }
 .activityList{
   width:100%;
-  height:340px;
+  height:330px;
+  margin-bottom: 0px;
   overflow:hidden;
   overflow-y:scroll;
   display:inline-block;
