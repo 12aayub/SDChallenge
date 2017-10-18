@@ -187,6 +187,10 @@ border-style: ridge;
 }
 
 /*leaderboard*/
+
+ol{
+  -webkit-padding-start: 20px;
+}
 .boardContainer{
   float:right;
   width:49%;
@@ -217,6 +221,10 @@ border-style: ridge;
 }
 
 @media (min-width:961px){
+  ol{
+    -webkit-padding-start: 40px;
+  }
+
   .wreath {
     display: inline-block;
     margin-top: -30%;
