@@ -85,10 +85,19 @@ border-style: ridge;
 }
 .activityList{
   width:100%;
-  height:370px;
+  height:340px;
   overflow:hidden;
   overflow-y:scroll;
   display:inline-block;
+}
+@media (min-width:961px){
+  .activityList{
+    width:100%;
+    height:370px;
+    overflow:hidden;
+    overflow-y:scroll;
+    display:inline-block;
+  }
 }
 .activity{
   background-color:#e6e6e6;
