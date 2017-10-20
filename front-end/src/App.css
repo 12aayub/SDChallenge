@@ -81,6 +81,7 @@ border-style: ridge;
 
 @media (min-width:961px){
   .mapContainer {
+    height: 600px;
     width:49%;
     display: inline-block;
     float:left
@@ -218,7 +219,7 @@ border-style: ridge;
 
 .boardContainer{
   float:right;
-  width:49%;
+  width:100%;
   height: 197px;
   overflow:hidden;
   overflow-y:scroll;
@@ -226,6 +227,10 @@ border-style: ridge;
   opacity: .7;
   margin-bottom: 60px;
   border:solid 0.8px;
+}
+
+.col-xs-12 {
+  padding: 0px;
 }
 
 .leaderboard {
