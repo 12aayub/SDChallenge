@@ -200,8 +200,6 @@ border-style: ridge;
 }
 
 /*leaderboard*/
-
-
 .boardContainer{
   float:right;
   width:49%;
@@ -248,7 +246,7 @@ border-style: ridge;
     opacity: .5
   }
   .boardContainer{
-    height: 202px;
+    height: 225px;
     padding-left: 6%;
     border:solid 0.8px;
   }
