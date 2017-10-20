@@ -115,12 +115,13 @@ h3{
   }
 }
 .activityList{
-  width:100%;
+  width:102%;
   height:396px;
   margin-bottom: 0px;
   overflow:hidden;
   overflow-y:scroll;
   display:inline-block;
+  margin-left: -30px;
 }
 
 @media (min-width:961px){
@@ -284,7 +285,7 @@ h3{
   }
   #boardTitle{
     font-size: 1.75em;
-    margin-top: 125px;
+    margin-top: 30%;
     margin-left: 6%;
     padding-bottom: 2%;
   }
