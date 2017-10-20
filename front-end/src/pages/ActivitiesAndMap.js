@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ListGroup, ListGroupItem, Grid, Col, Row } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 const MapStyles = require("./MapStyles.json")
@@ -7,8 +7,8 @@ const MapStyles = require("./MapStyles.json")
 const MapComponent = compose(
 withProps({
   googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCnSa0UV1EelPqTT2Uo3CyxSfnkDIcTwaA",
-  loadingElement: <div />,
-  containerElement: <div className= "mapContainer" />,
+  loadingElement: <div style={{ height: `100%` }} />,
+  containerElement: <div className= "mapContainer" style={{ height: `600px`, width:`49%`, display:`inline-block`, float:`left`}} />,
   mapElement: <div style={{ height: `100%`}} />,
   center: { lat: 32.848773, lng: -117.149494 },
 }),
@@ -43,17 +43,12 @@ class ActivitiesAndMap extends Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
+      <div>
       <MapComponent
       onMarkerClick={this.open.bind(this)}
       activities={this.props.activities}
       />
-          </Col>
-      </Row>
-        <Row id = "challengesSection">
-          <Col xs={12}>
+        <div id = "challengesSection">
           <ListGroup className = "activityList">
             {this.props.activities.map((activity) =>{
               return (
@@ -67,9 +62,8 @@ class ActivitiesAndMap extends Component {
             {this.modal2()}
             {this.modal()}
           </ListGroup>
-          </Col>
-        </Row>
-      </Grid>
+        </div>
+      </div>
     );
   }
 
