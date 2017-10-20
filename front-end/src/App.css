@@ -267,8 +267,8 @@ border-style: ridge;
   .leaderboard ol{
     -webkit-padding-start: 40px;
     width: 60%;
-    margin-left: 22%
-    flex-wrap: wrap
+    margin-left: 22%;
+    flex-wrap: wrap;
   }
 
   .wreath {
