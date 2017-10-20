@@ -74,9 +74,10 @@ h3{
 }
 /*Map styles*/
 .mapContainer{
-margin-top:10px;
-border:solid 3px ;
-border-style: ridge;
+  height: 400px;
+  margin-top:10px;
+  border:solid 3px ;
+  border-style: ridge;
 }
 
 @media (min-width:961px){
@@ -114,7 +115,7 @@ border-style: ridge;
   }
 }
 .activityList{
-  width:100%;
+  width:199%;
   height:396px;
   margin-bottom: 0px;
   overflow:hidden;
@@ -231,6 +232,7 @@ border-style: ridge;
 
 .col-xs-12 {
   padding: 0px;
+  width: 199%;
 }
 
 .leaderboard {
@@ -267,6 +269,7 @@ border-style: ridge;
     opacity: .5
   }
   .boardContainer{
+    width: 49%;
     height: 202px;
     padding-left: 6%;
     border:solid 0.8px;
