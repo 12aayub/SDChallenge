@@ -115,6 +115,7 @@ border-style: ridge;
     overflow:hidden;
     overflow-y:scroll;
     display:inline-block;
+    flex-wrap: wrap;
   }
 }
 
@@ -142,6 +143,7 @@ border-style: ridge;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) !important;
+    flex-wrap: wrap;
   }
 }
 .modal-backdrop
@@ -266,6 +268,7 @@ border-style: ridge;
     -webkit-padding-start: 40px;
     width: 60%;
     margin-left: 22%
+    flex-wrap: wrap
   }
 
   .wreath {
