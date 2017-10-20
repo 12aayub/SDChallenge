@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Grid, Column, Row } from 'react-bootstrap';
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 const MapStyles = require("./MapStyles.json")
@@ -43,12 +43,17 @@ class ActivitiesAndMap extends Component {
 
   render() {
     return (
-      <div>
+      <Grid>
+        <Row>
+          <Column xs={6}
       <MapComponent
       onMarkerClick={this.open.bind(this)}
       activities={this.props.activities}
       />
-        <div id = "challengesSection">
+        </Col>
+      </Row>
+        <Row id = "challengesSection">
+          <Column xs={6}>
           <ListGroup className = "activityList">
             {this.props.activities.map((activity) =>{
               return (
@@ -62,8 +67,9 @@ class ActivitiesAndMap extends Component {
             {this.modal2()}
             {this.modal()}
           </ListGroup>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 
