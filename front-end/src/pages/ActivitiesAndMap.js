@@ -45,7 +45,7 @@ class ActivitiesAndMap extends Component {
     return (
       <Grid>
         <Row>
-          <Column xs={6}
+          <Column xs={6}>
       <MapComponent
       onMarkerClick={this.open.bind(this)}
       activities={this.props.activities}
