@@ -45,15 +45,15 @@ class ActivitiesAndMap extends Component {
     return (
       <Grid>
         <Row>
-          <Col xs={6}>
+          <Col xs={12}>
       <MapComponent
       onMarkerClick={this.open.bind(this)}
       activities={this.props.activities}
       />
-        </Col>
+          </Col>
       </Row>
         <Row id = "challengesSection">
-          <Col xs={6}>
+          <Col xs={12}>
           <ListGroup className = "activityList">
             {this.props.activities.map((activity) =>{
               return (
